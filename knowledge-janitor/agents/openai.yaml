@@ -1,0 +1,4 @@
+interface:
+  display_name: "Knowledge Janitor"
+  short_description: "Audit knowledge lifecycle and repository hygiene"
+  default_prompt: "Use $knowledge-janitor in non-destructive audit mode; propose changes and require explicit approval before moving files or modifying content."
