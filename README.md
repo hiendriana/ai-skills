@@ -7,6 +7,14 @@ installation: compatible AI tools discover Skills directly from this directory.
 For that reason, each Skill remains directly under the repository root. There
 is no intermediate `skills/` directory.
 
+## Repository Philosophy
+
+The goal of this repository is to build a library of durable, reusable AI Skills.
+
+Skills should remain largely platform-neutral. Platform-specific metadata should
+be kept small and isolated, while workflows, guides, templates, and supporting
+documentation remain portable across AI assistants whenever practical.
+
 ## Repository layout
 
 ```text
