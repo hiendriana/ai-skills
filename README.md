@@ -1,172 +1,109 @@
-# AI Skills
+# Reusable AI Skills
 
-Reusable AI Skills for Codex, Claude Code, and future AI coding assistants.
+This repository contains reusable AI Skills for recurring documentation and
+knowledge-management work. The checked-out repository is also the live Skill
+installation: compatible AI tools discover Skills directly from this directory.
 
-This repository is the source of truth for reusable, vendor-neutral Skills that automate recurring engineering and knowledge-management workflows.
+For that reason, each Skill remains directly under the repository root. There
+is no intermediate `skills/` directory.
 
-Each Skill encapsulates a single responsibility and can be installed into compatible AI tooling. Whenever possible, Skills are designed so that only a small adapter is platform-specific while the workflow, guides, templates, and documentation remain portable.
-
----
-
-# Repository Structure
+## Repository layout
 
 ```text
 .
 ├── README.md
 ├── AGENTS.md
-├── shared/
-│   ├── documentation-principles.md
-│   ├── prompt-writing-guidelines.md
-│   ├── validation-checklist.md
-│   └── ...
-├── skills/
-│   ├── repository-documentation-audit/
-│   ├── knowledge-curator/
-│   ├── knowledge-janitor/
-│   └── ...
-└── templates/
-    └── ...
+├── .gitignore
+├── knowledge-curator/
+├── knowledge-janitor/
+└── repository-documentation-audit/
 ```
 
-## `skills/`
+Each Skill is self-contained and owns its relevant files:
 
-Contains one directory per reusable Skill.
+- `SKILL.md` defines the Skill's responsibility, workflow, safety rules, and
+  reporting contract.
+- `guides/` contains detailed guidance used only by that Skill.
+- `templates/` contains templates used only by that Skill.
+- `agents/` contains platform-specific metadata belonging to that Skill.
 
-Each Skill is self-contained and typically includes:
+In particular, `agents/openai.yaml` is OpenAI-specific metadata. The main Skill
+workflow and supporting guidance should remain platform-neutral as practical.
+Add metadata for another platform inside the relevant Skill only after its
+actual integration requirements are known; do not invent prospective formats.
 
-```text
-skill-name/
-├── SKILL.md
-├── guides/
-├── templates/        (optional)
-└── agents/
-    ├── openai.yaml
-    └── ...
-```
+## Current Skills
 
-### `SKILL.md`
+- [`repository-documentation-audit`](repository-documentation-audit/SKILL.md)
+  audits and reorganizes repository documentation so topics have clear owners,
+  useful knowledge is preserved, and documented claims match implementation.
+- [`knowledge-curator`](knowledge-curator/SKILL.md) reviews and
+  non-destructively processes Markdown inbox notes into durable domain
+  knowledge while preserving source notes, evidence, links, and uncertainty.
+- [`knowledge-janitor`](knowledge-janitor/SKILL.md) audits lifecycle state and
+  hygiene in personal Markdown knowledge repositories and proposes or applies
+  narrowly approved archival and cleanup work.
 
-The entry point describing the Skill's purpose, workflow, responsibilities, safety guarantees, and reporting contract.
+These descriptions are derived from the current `SKILL.md` entry points.
+Platform compatibility should be inferred only from integration or metadata
+that is actually present in the relevant Skill.
 
-### `guides/`
+## Design Principles
 
-Detailed guidance referenced by the Skill.
+Skills in this repository are designed to:
 
-### `templates/`
+- solve one well-defined problem;
+- remain self-contained;
+- be non-destructive by default;
+- require explicit approval for destructive actions;
+- produce clear validation and reporting output;
+- minimize platform-specific metadata;
+- remain portable across AI platforms whenever practical.
 
-Reusable templates used by the Skill when appropriate.
+## Install or clone
 
-### `agents/`
-
-Platform-specific metadata required by AI tooling.
-
-For example:
-
-- `openai.yaml`
-- `claude.yaml` (future)
-- other tool-specific metadata
-
-The Skill itself should remain as platform-independent as possible.
-
----
-
-## `shared/`
-
-Documentation shared across multiple Skills.
-
-Examples include:
-
-- documentation principles
-- validation checklists
-- prompt-writing guidelines
-- naming conventions
-
-Only place information here once genuine duplication exists.
-
----
-
-## `templates/`
-
-Repository-wide templates that are useful across multiple Skills.
-
-Avoid creating templates that are only used by a single Skill.
-
----
-
-# Design Principles
-
-Every Skill should:
-
-- have a single responsibility
-- be reusable
-- be largely platform independent
-- be non-destructive by default
-- require explicit approval before destructive actions
-- support review before apply whenever practical
-- produce clear reports
-- avoid duplicated guidance
-- prefer updating existing information over creating duplicates
-
----
-
-# Current Skills
-
-## Repository Documentation Audit
-
-Audits repository documentation and improves its structure while preserving the repository as the source of truth.
-
-## Knowledge Curator
-
-Processes captured knowledge from the inbox and integrates durable information into the knowledge base.
-
-## Knowledge Janitor
-
-Reviews the knowledge base for lifecycle, hygiene, duplication, stale information, and archive eligibility.
-
----
-
-# Installation
-
-Clone this repository into your local AI Skills directory.
-
-Example:
+Clone the repository directly into the live installation path:
 
 ```bash
 git clone <repository-url> ~/.agents/skills
 ```
 
-Compatible AI tools can then discover or install Skills from this location according to their own conventions.
+The destination should not already contain files. If a live installation
+already exists, inspect and preserve it before replacing it with a clone.
 
----
+To update an existing checkout without creating a merge commit:
 
-# Versioning
+```bash
+cd ~/.agents/skills
+git status
+git pull --ff-only
+```
 
-Each Skill evolves independently.
+Review or commit local work before pulling. Do not pull over unexplained
+changes in the live installation.
 
-Changes should be:
+## Maintain and publish changes
 
-- focused
-- reviewable
-- backward compatible whenever practical
+Inspect the complete working tree and validate the affected Skills before
+committing:
 
-Prefer small commits over large refactorings.
+```bash
+cd ~/.agents/skills
+git status
+git diff
+git diff --check
+git add <reviewed-paths>
+git commit -m "Describe the focused change"
+git push
+```
 
----
+Stage explicit reviewed paths so unrelated live-installation changes are not
+included accidentally. Follow the repository-specific maintenance rules in
+[`AGENTS.md`](AGENTS.md).
 
-# Contributing
+## Sensitive and generated files
 
-When creating or modifying a Skill:
-
-1. Keep responsibilities narrowly focused.
-2. Avoid duplicating shared guidance.
-3. Preserve backward compatibility where practical.
-4. Validate the Skill before committing.
-5. Update documentation when behavior changes.
-
----
-
-# Long-Term Vision
-
-The goal of this repository is to build a library of reusable AI Skills that can be shared across projects and AI platforms.
-
-Whenever possible, workflows, guides, templates, and documentation should remain vendor-neutral, while only minimal metadata inside each Skill's `agents/` directory is platform-specific.
+Do not commit credentials, tokens, private keys, personal data, `.env` or other
+secret files, runtime caches, editor state, build artifacts, or
+machine-specific configuration. Before committing, inspect staged changes and
+confirm that examples use placeholders rather than real sensitive values.
