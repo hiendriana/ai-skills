@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repository Documentation Audit"
+  short_description: "Clean, verify, and reorganize repository documentation"
+  default_prompt: "Audit and reorganize this repository's README.md, AGENTS.md, and docs/. Verify claims against the implementation, reduce duplication, preserve useful knowledge, and report the checks performed."
