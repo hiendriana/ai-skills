@@ -1,47 +1,78 @@
 # Lifecycle Review
 
-Review capture state without curating the captured knowledge.
+Review capture state without curating captured knowledge.
 
-## Eligible states
+## Lifecycle areas
 
-- Inspect `processed`, `rejected`, and `needs-review` notes for metadata and
-  maintenance problems.
-- Inspect archived notes when an archive already exists.
-- Protect `pending` notes from archival, deletion proposals, status changes,
-  and obsolescence judgments.
+- **Active inbox cleanup:** find captures marked `processed` but misplaced in an
+  active inbox. Propose exact moves into its documented `processed/` directory.
+- **Recycle-bin review:** evaluate captures already inside a documented
+  `processed/` directory for retention or removal eligibility.
+- **Approved recycle-bin removal:** remove only exact eligible files after a
+  deletion review and later file-specific approval.
+- **General knowledge hygiene:** keep unrelated links, metadata, ownership, and
+  duplication work separate from capture removal.
 
-Check that lifecycle metadata uses understood statuses, preserves capture and
-source metadata, records valid repository-relative destinations where
-applicable, and does not claim a processing or archive commit that lacks the
-change.
+Protect pending, `needs-review`, rejected, untracked, and never-committed
+captures from removal in every mode.
 
-## Conservative archive eligibility
+## Policy and path gate
 
-A processed note may be proposed for archival only when all of these are true:
+Before proposing a move or removal, verify that repository policy explicitly:
 
-- every recorded destination exists;
-- integration appears complete without extracting new knowledge from the note;
-- no unresolved conflict or question remains;
-- no manual review is required;
-- source metadata and original captured content remain intact;
-- moving the note will not break links, or affected links can be updated;
-- the note need not remain immediately accessible for likely reprocessing;
-- the user has approved an archive policy.
+1. identifies the source as a capture inbox;
+2. identifies that inbox's `processed/` directory as a temporary recycle bin;
+3. defines a recoverable version-control removal workflow; and
+4. defines any required retention period or retention evidence.
 
-A status of `processed`, age, duplication, or rejection is never sufficient by
-itself. When evidence is incomplete, classify the note as not safe to archive
-and explain what must be verified.
+Do not invent a default retention period. If policy is absent, conflicting, or
+ambiguous, audit and report only.
 
-## Approved archive moves
+## Removal eligibility
 
-Move only exact approved paths into `inbox/archive/`. Preserve filenames unless
-a collision requires a non-destructive resolution. Preserve all existing front
-matter and body content; add only lifecycle fields such as:
+A processed capture is eligible for a removal proposal only when every check
+passes:
 
-```yaml
-archived_at: 2026-07-19
-previous_path: inbox/example.md
-```
+- the exact file is inside a repository-documented processed capture directory;
+- lifecycle status is `processed`;
+- every repository-relative `integrated_into` destination exists;
+- destination review shows the selected integration is complete without
+  extracting new knowledge from the capture;
+- no unresolved conflict, question, manual review requirement, or provenance
+  problem remains;
+- no inbound repository link would break;
+- the file is tracked by Git;
+- Git history proves an existing commit contains the capture at the processed
+  path, and any stronger repository requirement for integration commit evidence
+  also passes;
+- the index and working tree make the file's identity and proposed removal
+  unambiguous; and
+- any repository-defined retention period has elapsed.
 
-Update references affected by the move and report old and new paths. Do not
-create deeper archive taxonomies without an established repository convention.
+Status, age, apparent duplication, or a populated `processing_commit` field is
+never sufficient by itself. Verify the referenced commit and its relevant
+contents. When any evidence is missing, classify the capture as ineligible and
+state what must be resolved.
+
+## Review and approval sequence
+
+1. Report each exact candidate path, every eligibility result, retention result,
+   inbound-link result, and the commit identifier and path that prove recovery.
+2. Explain what provenance or reprocessing convenience removal will discard
+   from the working tree.
+3. Make no change during the deletion review.
+4. Require a later approval naming each exact file. Broad approval such as
+   "clean my inbox" is insufficient.
+5. Immediately before removal, repeat all gates and stop if repository state or
+   evidence changed.
+
+## Recoverability evidence
+
+Git recoverability requires proof from an existing commit, not merely a file in
+`processed/`, a tracked index entry, a staged addition, or an unverified hash in
+front matter. Record the verified commit identifier and repository-relative path
+for each candidate and confirm the committed blob contains the capture expected
+to be removed.
+
+Removal itself is a working-tree change until committed. Report that distinction
+and never create the removal commit unless explicitly requested.

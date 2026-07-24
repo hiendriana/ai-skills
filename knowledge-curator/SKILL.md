@@ -1,27 +1,25 @@
 ---
 name: knowledge-curator
-description: Review and non-destructively process Markdown notes from a personal knowledge repository inbox into durable domain knowledge. Use when Codex is asked to assess, curate, integrate, or process one inbox note or multiple pending notes while preserving source notes, preferring existing pages, avoiding duplication, preserving evidence and links, and reporting proposals before applying changes.
+description: Review and integrate unverified Markdown captures from a personal knowledge repository inbox into durable domain knowledge, then move successfully validated captures into a policy-defined processed recycle bin. Use when Codex is asked to assess, curate, integrate, or process one active inbox capture or multiple pending captures while preserving proposal-before-apply review, evidence, provenance, idempotency, and recoverability boundaries.
 ---
 
 # Knowledge Curator
 
 Integrate durable, verified knowledge from inbox captures without treating the
-captures as authoritative or consuming them.
+captures as authoritative.
 
 ## Safety rules
 
-- Never delete, archive, move, clear, prune, or reorganize inbox notes.
-- Never run `rm`, `git clean`, or equivalent destructive cleanup commands.
-- Never overwrite or substantially rewrite a captured note's body.
-- Preserve source metadata, attribution, quotations, links, uncertainty, and
-  personal observations as provenance.
-- Modify a source note only to add or update small lifecycle front matter.
-- Keep every processed or rejected note recoverable in the inbox.
-- Leave retention and cleanup decisions to a separate `knowledge-janitor`
-  skill.
+- Require repository policy that explicitly defines the active inbox and its
+  `processed/` recycle-bin workflow before moving a capture.
+- Never delete captures or run destructive cleanup commands.
+- Never overwrite or substantially rewrite a capture's body or provenance.
+- Keep `pending` and `needs-review` captures in the active inbox.
+- Move a capture only after its approved integration validates successfully.
+- Never commit unless the user explicitly requests a commit.
 
 Read [the inbox lifecycle guide](guides/inbox-lifecycle.md) before changing note
-metadata. Read [the evidence and conflicts guide](guides/evidence-and-conflicts.md)
+metadata or paths. Read [the evidence and conflicts guide](guides/evidence-and-conflicts.md)
 when deciding whether claims are safe to integrate.
 
 ## Workflow
@@ -29,128 +27,111 @@ when deciding whether claims are safe to integrate.
 Follow this sequence:
 
 ```text
-Capture -> Proposal -> Review -> Apply -> Mark processed
+Capture -> Curate -> Validate -> Move to processed/ -> Commit -> Janitor review -> Approved removal
 ```
 
 ### 1. Establish scope
 
-1. Locate the knowledge repository root and read its `AGENTS.md`, root
-   `README.md`, and `inbox/README.md` when present.
-2. Interpret a named Markdown path as single-note mode. Interpret a request to
+1. Locate the repository root and read its `AGENTS.md`, root `README.md`, and
+   inbox policy files when present.
+2. Confirm that repository policy explicitly documents the `processed/`
+   recycle-bin lifecycle. Without it, propose knowledge integration but do not
+   move captures or invent lifecycle conventions.
+3. Interpret a named Markdown path as single-note mode. Interpret a request to
    process the inbox as multiple-note mode.
-3. In multiple-note mode, enumerate Markdown notes under `inbox/`, excluding
-   policy files such as `README.md` and `AGENTS.md`.
-4. Treat missing lifecycle front matter as `pending`.
-5. Ignore `processed` notes unless the user explicitly requests reprocessing.
-   Ignore `rejected` notes unless the user explicitly requests reconsideration.
-6. Include `pending` and `needs-review` notes, while preserving their different
-   states in the report.
+4. In multiple-note mode, enumerate Markdown captures under active inboxes,
+   excluding policy files such as `README.md` and `AGENTS.md` and excluding
+   every `processed/` directory and its entire subtree.
+5. Treat missing lifecycle front matter as `pending`. Include `pending` and
+   `needs-review` captures while preserving their distinct states.
+6. Skip `processed` captures by default. If explicitly asked to revisit one,
+   verify its destinations and do not reintegrate represented claims.
 7. Inspect Git status and preserve unrelated changes.
 
 ### 2. Select the mode
 
 Use proposal mode by default. Enter apply mode only when the invocation
-explicitly asks to apply changes or approves a previously reported proposal.
+explicitly requests changes or approves a previously reported proposal.
 
-In proposal mode:
+In proposal mode, inspect captures, evidence, existing knowledge, and candidate
+destinations; report proposed integrations and lifecycle outcomes; change
+nothing.
 
-- inspect notes, evidence, existing knowledge, and candidate destinations;
-- propose integrations and lifecycle outcomes;
-- do not modify domain pages or note metadata;
-- stop after the review report.
+In apply mode, apply only approved integrations, validate them, update lifecycle
+metadata, and move each successfully processed capture to its policy-defined
+`processed/` directory. Do not move a capture if integration or validation
+fails.
 
-In apply mode:
+### 3. Curate unverified input
 
-- apply only the explicitly requested or approved integrations;
-- update relevant indexes and cross-links;
-- update lifecycle metadata only after validating the integration;
-- leave every source note in place;
-- produce the processing report.
-
-### 3. Review knowledge and evidence
-
-Treat every note as captured input and every claim as a proposal. Distinguish
-sourced facts, attributable experience, interpretation, recommendations,
-questions, and speculation. Preserve uncertainty and flag contradictions with
-existing knowledge.
+Treat every capture as input and every claim as a proposal. Distinguish sourced
+facts, attributable experience, interpretation, recommendations, questions,
+and speculation. Preserve uncertainty and flag contradictions.
 
 Do not invent missing context or promote unsupported claims. Verify important
-claims with authoritative evidence when required by repository policy. If safe
-integration is not possible, propose or apply `needs-review`; use `rejected`
-only with explicit user approval or an invocation that explicitly permits
-rejection.
+claims when repository policy requires it. If safe integration is blocked, use
+`needs-review`; use `rejected` only with explicit authority and leave that
+capture in the active inbox.
 
 ### 4. Locate the durable owner
 
-Inventory relevant domain indexes and pages before proposing a destination.
+Inventory relevant pages and indexes before selecting a destination.
 
-- Choose the narrowest durable owner.
-- Prefer updating an existing page over creating a new page.
-- Create a page only when the material is substantial, independently useful,
-  clearly scoped, and has no suitable existing owner.
-- Search for semantic overlap, not only matching filenames.
-- Link to a primary owner instead of duplicating explanations.
-- Keep repository-specific implementation and operations in their source
-  repository; summarize and link from the knowledge base.
-- Preserve useful links, attribution, provenance, and uncertainty.
-
-For a previously processed note that the user explicitly asks to reprocess,
-verify every recorded `integrated_into` destination before proposing changes.
-Do not re-add claims already represented there.
+- Choose the narrowest durable owner and prefer an existing page.
+- Create a page only when independently useful material has no suitable owner.
+- Search for semantic overlap and link to a primary owner instead of duplicating
+  explanations.
+- Keep source-repository implementation and operations in that repository;
+  summarize and link from the knowledge base.
+- Preserve useful evidence, attribution, provenance, and uncertainty.
 
 ### 5. Report before applying
 
-In proposal mode, report for every note:
-
-1. note path and current status;
-2. durability assessment and rationale;
-3. verified claims or attributable observations worth retaining;
-4. claims to omit and why;
-5. proposed pages to create or update;
-6. links and provenance to preserve;
-7. proposed lifecycle status;
-8. uncertainties, conflicts, and decisions requiring user input.
-
-For multiple notes, add a consolidated plan and identify overlap between notes
-or shared destinations. Do not apply the proposal in the same turn unless the
-invocation explicitly selected apply mode.
+For every capture, report its path and status, durability assessment, claims to
+integrate and omit, proposed destinations, provenance to preserve, proposed
+lifecycle outcome, and unresolved decisions. In multiple-note mode, add a
+consolidated plan and identify overlap. Do not apply the proposal in the same
+turn unless apply mode was explicitly selected.
 
 ### 6. Apply idempotently
 
-1. Recheck Git status, note status, and destination contents.
-2. Apply only approved durable claims that are not already represented.
-3. Synthesize in the destination owner's style; do not paste the note body.
+1. Recheck Git status, capture status and path, approved scope, and destination
+   contents.
+2. Stop if the capture is already processed and represented at every recorded
+   destination; do not duplicate integration or lifecycle moves.
+3. Apply only approved durable claims not already represented. Synthesize in
+   the destination owner's style rather than copying the capture body.
 4. Update indexes and cross-links only when needed.
-5. Validate the knowledge changes before updating note lifecycle metadata.
-6. Mark a successfully integrated note `processed`, recording the integration
-   date and destination paths.
-7. Mark a note `needs-review` when safe integration remains blocked. Mark it
-   `rejected` only under the explicit rejection rule.
-8. Change only lifecycle fields in front matter. Preserve the captured body and
-   all source metadata exactly.
+5. Validate the integration before changing capture metadata or location.
+6. After successful validation, set `status: processed`, record `processed_at`,
+   and record repository-relative `integrated_into` paths.
+7. Move the complete capture, with body and provenance unchanged, from the
+   active inbox to that inbox's policy-defined `processed/` directory.
+8. Update links affected by the move. Avoid durable-page backlinks to the
+   disposable processed capture unless the link remains genuinely useful.
 
-If any knowledge edit or validation fails, do not mark the note `processed`.
-Do not claim a processing commit unless the relevant changes are actually
-contained in that commit.
+If any integration, validation, metadata update, or move fails, leave the
+capture unprocessed in the active inbox or restore the operation to that state.
+Do not claim Git recoverability based only on the file's presence under
+`processed/`.
 
 ## Validate and report
 
-Verify modified relative links and referenced paths, inspect the final diff,
-and check for duplicated knowledge, unsupported claims, lost uncertainty,
-secrets, private content, and unrelated changes. Confirm that every source note
-still exists and its captured body and provenance remain unchanged.
+Verify modified links and paths, destination coverage, idempotency, the complete
+capture body and provenance, the final diff, sensitive content, unsupported
+claims, and unrelated changes. Determine tracking and commit evidence
+separately; a tracked working-tree path is not necessarily present in a commit.
 
-For every note handled in apply mode, report:
+For every capture applied, report:
 
-1. note path;
+1. original path and processed path;
 2. previous and new status;
-3. destination pages created;
-4. destination pages updated;
-5. claims integrated;
-6. claims omitted;
-7. uncertainties or conflicts;
-8. links added;
-9. whether manual review remains required.
+3. destination pages;
+4. claims integrated and omitted;
+5. validation performed;
+6. whether the processed capture is currently Git-tracked;
+7. whether an existing commit contains the processed capture, with evidence;
+8. whether manual review remains required.
 
-Also report validation performed and any uncommitted changes. Do not claim that
-a check passed unless it was run.
+Also report uncommitted changes. Do not claim a check passed unless it ran, and
+do not commit unless explicitly requested.
