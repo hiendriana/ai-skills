@@ -1,4 +1,4 @@
 interface:
   display_name: "Knowledge Curator"
   short_description: "Safely review and integrate inbox knowledge"
-  default_prompt: "Use $knowledge-curator in proposal mode to review pending inbox notes without modifying or deleting them."
+  default_prompt: "Use $knowledge-curator in proposal mode to review pending inbox captures and propose validated integration before any processed/ move."

@@ -4,37 +4,46 @@ Keep audits read-only and apply runs narrowly authorized.
 
 ## Approval boundary
 
-- Audit mode is always the default.
-- Archive apply mode requires an approved archive policy and exact note paths.
-- Hygiene apply mode requires exact named actions or files from a reviewed
-  proposal.
-- Deletion review does not authorize deletion. Later approval must name every
-  file, and this skill still may not perform permanent deletion.
-- A general instruction to clean, tidy, organize, fix everything, or apply best
-  judgment is not approval for moves or content changes.
+- Audit and proposal mode is always the default.
+- Moving a misplaced processed capture requires an approved exact path and a
+  repository-documented recycle-bin policy.
+- Removal requires a completed deletion review followed by later file-specific
+  approval for every exact path.
+- Hygiene changes require exact named actions or files from a reviewed plan.
+- A request to clean, tidy, organize, fix everything, or use best judgment never
+  authorizes movement or removal.
 
-Before applying, recheck Git status, current paths, lifecycle metadata, links,
-and the approved target list. Stop if repository state invalidates the plan.
+Before applying, recheck Git status, paths, lifecycle metadata, destinations,
+integration completeness, links, retention, commit evidence, and the approved
+target list. Stop if repository state invalidates or obscures the plan.
 
-## Prohibited operations
+## Removal mechanism
 
-Never use `rm`, `git clean`, destructive glob deletion, permanent filesystem
-deletion, `git reset --hard`, rebase, filter-branch, filter-repo, or other
-history-rewriting commands. Do not remove pending, processed, rejected, or
-archived captures as an incidental cleanup step.
+Use only the repository's documented recoverable version-control workflow. In
+a Git repository, an explicitly documented workflow may use an exact-path form
+such as `git rm -- path/to/capture.md`, but only for a single reviewed and
+approved file or an explicit list of individually approved files.
 
-## Apply validation
+Never use filesystem `rm`, destructive globs, recursive directory deletion,
+`git clean`, broad pathspecs, `git reset --hard`, rebase, filter-branch,
+filter-repo, or other history rewriting. Never remove an ineligible capture as
+an incidental cleanup step. Do not commit unless separately requested.
 
-After an approved change:
+## Final validation
 
-1. confirm every moved or modified file is on the approved list;
-2. verify source captures retain their original content and provenance;
-3. resolve modified relative links and referenced paths;
-4. confirm archive metadata and destination paths are accurate;
-5. check indexes and inbound links affected by moves or renames;
-6. inspect the complete diff and working-tree status;
-7. run `git diff --check` when the repository uses Git;
-8. scan changes for sensitive values, unsupported claims, and unrelated edits;
-9. report approved actions intentionally left unapplied.
+After an approved move, removal, or hygiene change:
 
-Do not commit unless the user separately requests a commit.
+1. confirm every changed or removed path was explicitly approved and in scope;
+2. verify lifecycle state, destination existence, integration completeness, and
+   commit evidence for every removed capture;
+3. resolve relative links and referenced paths and verify no inbound link broke;
+4. inspect the complete diff and working-tree status, including staged and
+   unstaged state;
+5. run `git diff --check` when the repository uses Git;
+6. scan changed and candidate tracked files for sensitive values, unsupported
+   claims, personal data, and machine-specific configuration;
+7. confirm no unrelated file or lifecycle state changed;
+8. report the recovery commit and committed path for each removed capture;
+9. report approved actions intentionally left unapplied and all uncertainty.
+
+Do not claim a check passed unless it was run.
