@@ -17,8 +17,9 @@ recycle bin, not durable knowledge or proof of Git recoverability.
   explicit authority and keep it in the active inbox unless repository policy
   defines a separate lifecycle outside this skill.
 
-The curator never deletes a capture. A janitor may later review a committed
-processed capture and remove it only under the repository's explicit policy and
+The curator never deletes a capture. A capture may be one Markdown file or one
+manifested bundle directory. A janitor may later review a committed processed
+capture and remove it only under the repository's explicit policy and
 file-specific approval.
 
 ## Front matter and content preservation
@@ -52,7 +53,10 @@ source material.
 - Resolve the target from repository policy; do not assume every repository or
   every directory named `processed` implements this lifecycle.
 - Move from an active inbox directly into that inbox's `processed/` directory,
-  preserving the filename unless policy defines a collision rule.
+  preserving the filename or complete bundle directory name unless policy
+  defines a collision rule.
+- For a bundle, move `capture.md` and every declared source file together. Never
+  move, process, or restore only part of a bundle.
 - Stop safely on collisions or ambiguous source and destination paths.
 - Update inbound links that would break. Prefer linking durable pages to durable
   owners rather than to a disposable processed capture.
@@ -66,6 +70,8 @@ Report these questions separately:
 1. Is the processed path currently tracked by Git?
 2. Does an existing commit contain the processed capture at that path and, when
    required by policy, the corresponding integration?
+
+For a bundle, answer both questions for the manifest and every declared member.
 
 Use repository-relative exact paths and inspect Git's index and history. File
 existence, a staged move, or a tracked path alone does not prove that a commit

@@ -1,6 +1,6 @@
 ---
 name: knowledge-janitor
-description: Audit capture lifecycle and general hygiene in personal Markdown knowledge repositories, including active-inbox cleanup, processed recycle-bin review, and exact-file Git-recoverable removal after explicit approval. Use when Codex is asked to review processed, rejected, or needs-review captures; identify eligible removal candidates; find broken links, stale indexes, duplication, drift, metadata defects, provenance gaps, or sensitive values; or apply an explicitly approved recycle-bin removal or hygiene plan without curating pending knowledge.
+description: Audit capture lifecycle and general hygiene in personal knowledge repositories containing Markdown captures and manifested PDF or image bundles, including active-inbox cleanup, processed recycle-bin review, and exact-file Git-recoverable removal after explicit approval. Use when Codex is asked to review processed, rejected, or needs-review captures; identify eligible bundle or note removal candidates; find broken links, stale indexes, duplication, drift, metadata defects, provenance gaps, or sensitive values; or apply an explicitly approved recycle-bin removal or hygiene plan without curating pending knowledge.
 ---
 
 # Knowledge Janitor
@@ -24,7 +24,8 @@ changing anything.
 
 Read [lifecycle review](guides/lifecycle-review.md), [knowledge hygiene](guides/knowledge-hygiene.md),
 and [safety and validation](guides/safety-and-validation.md) before proposing or
-applying the corresponding work.
+applying the corresponding work. Read [bundle review](guides/bundle-review.md)
+before auditing or removing a manifested PDF or image capture.
 
 ## Establish scope
 
@@ -35,6 +36,8 @@ applying the corresponding work.
    inboxes and processed recycle bins.
 4. Protect pending, `needs-review`, rejected, untracked, and never-committed
    captures from removal.
+5. Treat a manifested bundle as one indivisible capture; never propose or apply
+   removal of only its manifest or one source file.
 
 ## Select a mode
 
@@ -70,6 +73,10 @@ completeness, unresolved review or provenance issues, inbound links, retention
 policy, Git tracking, commit evidence, and working-tree clarity. A `processed`
 status or age alone never establishes eligibility.
 
+For a bundle, also verify the manifest, declared membership, media types, byte
+sizes, SHA-256 values, extraction coverage, inbound links to every member, and
+tracking and commit evidence for every member.
+
 Audit durable knowledge for broken links, orphaned pages, duplicate ownership,
 stale indexes, conflicting claims, missing provenance, sensitive values,
 obsolete paths, and invalid metadata. Do not rewrite for stylistic preference
@@ -88,6 +95,9 @@ In audit or review mode, report:
 7. lifecycle, link, ownership, drift, provenance, or sensitive-data findings;
 8. proposed actions ordered by risk;
 9. exact actions requiring explicit approval.
+
+For every bundle, report its exact directory and member paths, hash results,
+extraction limitations, and eligibility evidence for every member.
 
 After approved removal, additionally report every removed path, its approval,
 the commit evidence that preserves its contents, the documented workflow used,

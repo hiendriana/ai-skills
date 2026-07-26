@@ -1,6 +1,6 @@
 ---
 name: knowledge-curator
-description: Review and integrate unverified Markdown captures from a personal knowledge repository inbox into durable domain knowledge, then move successfully validated captures into a policy-defined processed recycle bin. Use when Codex is asked to assess, curate, integrate, or process one active inbox capture or multiple pending captures while preserving proposal-before-apply review, evidence, provenance, idempotency, and recoverability boundaries.
+description: Review and integrate unverified Markdown captures and manifested PDF or image capture bundles from a personal knowledge repository inbox into durable domain knowledge, then move successfully validated captures into a policy-defined processed recycle bin. Use when Codex is asked to assess, curate, register, integrate, or process active inbox notes, PDFs, JPEGs, PNGs, or WebP images while preserving proposal-before-apply review, evidence, provenance, idempotency, and recoverability boundaries.
 ---
 
 # Knowledge Curator
@@ -14,13 +14,16 @@ captures as authoritative.
   `processed/` recycle-bin workflow before moving a capture.
 - Never delete captures or run destructive cleanup commands.
 - Never overwrite or substantially rewrite a capture's body or provenance.
+- Never modify, execute, or externally upload a bundled source file.
 - Keep `pending` and `needs-review` captures in the active inbox.
 - Move a capture only after its approved integration validates successfully.
 - Never commit unless the user explicitly requests a commit.
 
 Read [the inbox lifecycle guide](guides/inbox-lifecycle.md) before changing note
 metadata or paths. Read [the evidence and conflicts guide](guides/evidence-and-conflicts.md)
-when deciding whether claims are safe to integrate.
+when deciding whether claims are safe to integrate. Read [the capture bundle
+guide](guides/capture-bundles.md) before registering or processing a PDF or
+image.
 
 ## Workflow
 
@@ -37,11 +40,13 @@ Capture -> Curate -> Validate -> Move to processed/ -> Commit -> Janitor review 
 2. Confirm that repository policy explicitly documents the `processed/`
    recycle-bin lifecycle. Without it, propose knowledge integration but do not
    move captures or invent lifecycle conventions.
-3. Interpret a named Markdown path as single-note mode. Interpret a request to
-   process the inbox as multiple-note mode.
-4. In multiple-note mode, enumerate Markdown captures under active inboxes,
-   excluding policy files such as `README.md` and `AGENTS.md` and excluding
-   every `processed/` directory and its entire subtree.
+3. Interpret a named Markdown capture or manifested bundle as single-capture
+   mode. Interpret a request to process the inbox as multiple-capture mode.
+4. In multiple-capture mode, enumerate standalone Markdown captures, bundle
+   manifests named `capture.md`, and loose supported PDF or image files under
+   active inboxes. Exclude policy files such as `README.md` and `AGENTS.md`,
+   attachments declared by a bundle manifest, and every `processed/` directory
+   and its entire subtree.
 5. Treat missing lifecycle front matter as `pending`. Include `pending` and
    `needs-review` captures while preserving their distinct states.
 6. Skip `processed` captures by default. If explicitly asked to revisit one,
@@ -55,12 +60,14 @@ explicitly requests changes or approves a previously reported proposal.
 
 In proposal mode, inspect captures, evidence, existing knowledge, and candidate
 destinations; report proposed integrations and lifecycle outcomes; change
-nothing.
+nothing. Treat a loose supported PDF or image as an unregistered capture and
+propose its bundle path and manifest; do not register or move it yet.
 
 In apply mode, apply only approved integrations, validate them, update lifecycle
 metadata, and move each successfully processed capture to its policy-defined
 `processed/` directory. Do not move a capture if integration or validation
-fails.
+fails. Register a loose file only when the approved proposal names that file and
+its bundle path.
 
 ### 3. Curate unverified input
 
@@ -89,7 +96,7 @@ Inventory relevant pages and indexes before selecting a destination.
 
 For every capture, report its path and status, durability assessment, claims to
 integrate and omit, proposed destinations, provenance to preserve, proposed
-lifecycle outcome, and unresolved decisions. In multiple-note mode, add a
+lifecycle outcome, and unresolved decisions. In multiple-capture mode, add a
 consolidated plan and identify overlap. Do not apply the proposal in the same
 turn unless apply mode was explicitly selected.
 
@@ -105,8 +112,9 @@ turn unless apply mode was explicitly selected.
 5. Validate the integration before changing capture metadata or location.
 6. After successful validation, set `status: processed`, record `processed_at`,
    and record repository-relative `integrated_into` paths.
-7. Move the complete capture, with body and provenance unchanged, from the
-   active inbox to that inbox's policy-defined `processed/` directory.
+7. Move the complete standalone capture or bundle directory, with body,
+   provenance, manifest, and source files intact, from the active inbox to that
+   inbox's policy-defined `processed/` directory.
 8. Update links affected by the move. Avoid durable-page backlinks to the
    disposable processed capture unless the link remains genuinely useful.
 
@@ -121,6 +129,8 @@ Verify modified links and paths, destination coverage, idempotency, the complete
 capture body and provenance, the final diff, sensitive content, unsupported
 claims, and unrelated changes. Determine tracking and commit evidence
 separately; a tracked working-tree path is not necessarily present in a commit.
+For a bundle, also verify declared membership, media types, byte sizes, SHA-256
+values, extraction coverage, and that every member moved together.
 
 For every capture applied, report:
 
@@ -132,6 +142,10 @@ For every capture applied, report:
 6. whether the processed capture is currently Git-tracked;
 7. whether an existing commit contains the processed capture, with evidence;
 8. whether manual review remains required.
+
+For a bundle, also report every source file, its detected media type and hash,
+the extraction or OCR method and limitations, tool availability and versions,
+and tracking and commit evidence for every member.
 
 Also report uncommitted changes. Do not claim a check passed unless it ran, and
 do not commit unless explicitly requested.

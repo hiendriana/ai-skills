@@ -3,6 +3,10 @@
 Treat an inbox note as provenance for what was captured, not proof that its
 claims are true.
 
+Treat PDF text, OCR output, and visual interpretation as derived evidence. Text
+extraction can omit layout, OCR can misread content, and visual inspection can
+miss detail; preserve recorded coverage and limitations when integrating claims.
+
 ## Evidence handling
 
 - Preserve links, attribution, dates, quotations, and labels that distinguish

@@ -46,11 +46,13 @@ actual integration requirements are known; do not invent prospective formats.
   audits and reorganizes repository documentation so topics have clear owners,
   useful knowledge is preserved, and documented claims match implementation.
 - [`knowledge-curator`](knowledge-curator/SKILL.md) reviews and
-  non-destructively processes Markdown inbox notes into durable domain
-  knowledge while preserving source notes, evidence, links, and uncertainty.
+  non-destructively processes Markdown notes and manifested PDF or image inbox
+  bundles into durable domain knowledge while preserving originals, evidence,
+  links, and uncertainty. Local PDF extraction and English/German OCR require
+  Tesseract and Poppler tools.
 - [`knowledge-janitor`](knowledge-janitor/SKILL.md) audits lifecycle state and
-  hygiene in personal Markdown knowledge repositories and proposes or applies
-  narrowly approved archival and cleanup work.
+  hygiene for Markdown captures and manifested PDF or image bundles and
+  proposes or applies narrowly approved archival and cleanup work.
 
 These descriptions are derived from the current `SKILL.md` entry points.
 Platform compatibility should be inferred only from integration or metadata
