@@ -9,6 +9,8 @@ Keep audits read-only and apply runs narrowly authorized.
   repository-documented recycle-bin policy.
 - Removal requires a completed deletion review followed by later file-specific
   approval for every exact path.
+- Bundle removal requires approval for the manifest and every declared member;
+  never infer approval for members from a directory name.
 - Hygiene changes require exact named actions or files from a reviewed plan.
 - A request to clean, tidy, organize, fix everything, or use best judgment never
   authorizes movement or removal.
@@ -29,6 +31,11 @@ Never use filesystem `rm`, destructive globs, recursive directory deletion,
 filter-repo, or other history rewriting. Never remove an ineligible capture as
 an incidental cleanup step. Do not commit unless separately requested.
 
+After approved removal of every member of a reviewed bundle, permit only a
+nonrecursive empty-directory operation on that exact bundle directory. Verify it
+is empty immediately first; stop if it contains any entry. This cleanup removes
+no capture data and does not replace exact-member approval.
+
 ## Final validation
 
 After an approved move, removal, or hygiene change:
@@ -45,5 +52,9 @@ After an approved move, removal, or hygiene change:
 7. confirm no unrelated file or lifecycle state changed;
 8. report the recovery commit and committed path for each removed capture;
 9. report approved actions intentionally left unapplied and all uncertainty.
+
+For a bundle, repeat membership, media-type, size, SHA-256, inbound-link,
+tracking, and committed-history checks for every member and confirm no empty or
+partial bundle remains.
 
 Do not claim a check passed unless it was run.

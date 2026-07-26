@@ -14,7 +14,8 @@ Review capture state without curating captured knowledge.
   duplication work separate from capture removal.
 
 Protect pending, `needs-review`, rejected, untracked, and never-committed
-captures from removal in every mode.
+captures from removal in every mode. Treat a manifested bundle as one capture
+and apply every gate to every member.
 
 ## Policy and path gate
 
@@ -49,6 +50,9 @@ passes:
   unambiguous; and
 - any repository-defined retention period has elapsed.
 
+For a bundle, the exact manifest and every declared source file must pass every
+applicable check. One failed member makes the complete bundle ineligible.
+
 Status, age, apparent duplication, or a populated `processing_commit` field is
 never sufficient by itself. Verify the referenced commit and its relevant
 contents. When any evidence is missing, classify the capture as ineligible and
@@ -61,8 +65,9 @@ state what must be resolved.
 2. Explain what provenance or reprocessing convenience removal will discard
    from the working tree.
 3. Make no change during the deletion review.
-4. Require a later approval naming each exact file. Broad approval such as
-   "clean my inbox" is insufficient.
+4. Require a later approval naming each exact file, including every member of a
+   bundle. Broad approval such as "clean my inbox" or a bundle directory alone
+   is insufficient.
 5. Immediately before removal, repeat all gates and stop if repository state or
    evidence changed.
 
@@ -73,6 +78,9 @@ Git recoverability requires proof from an existing commit, not merely a file in
 front matter. Record the verified commit identifier and repository-relative path
 for each candidate and confirm the committed blob contains the capture expected
 to be removed.
+
+For a bundle, record this evidence for `capture.md` and every declared source
+file at their exact processed paths.
 
 Removal itself is a working-tree change until committed. Report that distinction
 and never create the removal commit unless explicitly requested.
