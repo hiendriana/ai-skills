@@ -28,6 +28,16 @@ One short paragraph explaining the route's character and why it entered the coll
 | Exposure | Value and source, or Unknown |
 | Protection | Published description, or Unknown |
 
+## Topos
+
+For climbing routes, list every useful topo newest first. If none is found, state that outcome and name the main sources checked.
+
+| Date | Date basis | Topo | Format and scope | Notes |
+| --- | --- | --- | --- | --- |
+| YYYY-MM-DD | Creation / publication / edition / upload / page or photo date | [Topo](URL) | Line topo / photo topo / overview / guidebook / on-site reference | Variants and important differences |
+
+Do not imply that a webpage or photo date is the topo's creation date. Retain older useful versions and compare discrepancies in the line, grades, protection, variants, and descent. Prefer a current guidebook or route-author source for the primary comparison without discarding evidence of disagreement. Archive a downloadable topo in the route's Google Drive source folder only when lawful and useful for personal offline reference; otherwise keep the source page link.
+
 ## Logistics
 
 | Field | Information |
