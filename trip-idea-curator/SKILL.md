@@ -32,7 +32,7 @@ Use title case with spaces for human-facing filenames and directories. Follow an
 ## Research and Assess
 
 1. Identify the route precisely before writing. Keep ambiguous identifications explicit.
-2. Search current sources for location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, and objective hazards when relevant.
+2. Search current sources for location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
 3. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use detailed trip reports for attributed experience, not universal facts.
 4. Distinguish verified route facts, statements attributed to the recommender or publisher, the user's personal assessment, and unresolved or time-sensitive information.
 5. Treat historical posts, condition reports, grades, protection descriptions, and access details as planning context. State what needs current local verification.
@@ -50,6 +50,21 @@ Follow [the route-note schema](references/route-note-schema.md), adapting sectio
 - use `Unknown` or a clear verification gap instead of filling missing facts;
 - omit empty boilerplate sections;
 - do not add a task list or planning checklist unless the user explicitly requests one.
+
+Add a clear `Logistics` section when access information would help evaluate or execute the trip. Record the actual route start and end, useful ways to get there, parking or public-transport constraints, and return or shuttle needs. Include a direct Google Maps link to a verified trailhead, parking area, station, or other useful access point when available; label the point precisely and never substitute an imprecise search result for a confirmed location.
+
+For every multiday trip, add an `Accommodation` section with a compact night-by-night overview. Include only accommodation that shapes the itinerary: mountain huts, bivouacs, camps, staged trailheads, or a necessary pre-route or post-route stay. Do not recommend a generic hotel in the valley merely because lodging exists. For a single-day trip, include accommodation only when it materially affects access, an alpine start, transport, or route timing.
+
+For route-based ideas, add a `Navigation and Track` section that makes prior work visible. Record the track source page, any preserved original GPX, the selected navigation master, the track's intended scope, review state, download date, and known caveats. Omit the section for destination-only ideas until a route exists.
+
+Use one owner for each kind of information:
+
+- the trip note is the canonical research overview and links everything together;
+- the user's dedicated Google Drive account archives selected original GPX files, PDFs, topos, and other source files;
+- one selected service, normally Komoot or Outdooractive, owns the editable navigation route;
+- Suunto and the watch are deployment targets, not durable archives.
+
+Keep ordinary webpages as links in the note. Create a Google Drive route folder only when files are worth preserving. Use the same route name across systems, retain an original GPX unchanged, and do not maintain duplicate working routes in Komoot and Outdooractive without a specific reason. A source link is sufficient for an early idea; archive the GPX when the route becomes a serious candidate, offline recovery matters, or the source is fragile. Record stable research once and refresh only time-sensitive conditions, access, restrictions, transport, and accommodation before the trip.
 
 For skiing or splitboarding ideas adapted from ski itineraries, label the adaptation and leave terrain suitability, transitions, exit options, and current avalanche conditions as explicit review items unless verified.
 
