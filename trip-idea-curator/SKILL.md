@@ -32,7 +32,7 @@ Use title case with spaces for human-facing filenames and directories. Follow an
 ## Research and Assess
 
 1. Identify the route precisely before writing. Keep ambiguous identifications explicit.
-2. Search current sources for location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
+2. Search current sources for location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant. For climbing routes, always search for available topos.
 3. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use detailed trip reports for attributed experience, not universal facts.
 4. Distinguish verified route facts, statements attributed to the recommender or publisher, the user's personal assessment, and unresolved or time-sensitive information.
 5. Treat historical posts, condition reports, grades, protection descriptions, and access details as planning context. State what needs current local verification.
@@ -57,6 +57,8 @@ For every multiday trip, add an `Accommodation` section with a compact night-by-
 
 For route-based ideas, add a `Navigation and Track` section that makes prior work visible. Record the track source page, any preserved original GPX, the selected navigation master, the track's intended scope, review state, download date, and known caveats. Omit the section for destination-only ideas until a route exists.
 
+For climbing routes, add a `Topos` section whenever topos are available. Retain multiple useful versions and sort them newest first. For every entry, record the date and what that date represents, such as creation, publication, guidebook edition, upload, page update, or photo date. Do not present a webpage date as the topo's creation date. Identify the format and scope, including whether it is a line topo, photo topo, overview, guidebook page, or on-site reference. Compare meaningful differences in line, grades, protection, variants, and descent rather than silently choosing one version. If no topo is found, state that outcome and name the principal sources checked.
+
 Use one owner for each kind of information:
 
 - the trip note is the canonical research overview and links everything together;
@@ -64,7 +66,7 @@ Use one owner for each kind of information:
 - one selected service, normally Komoot or Outdooractive, owns the editable navigation route;
 - Suunto and the watch are deployment targets, not durable archives.
 
-Keep ordinary webpages as links in the note. Create a Google Drive route folder only when files are worth preserving. Use the same route name across systems, retain an original GPX unchanged, and do not maintain duplicate working routes in Komoot and Outdooractive without a specific reason. A source link is sufficient for an early idea; archive the GPX when the route becomes a serious candidate, offline recovery matters, or the source is fragile. Record stable research once and refresh only time-sensitive conditions, access, restrictions, transport, and accommodation before the trip.
+Keep ordinary webpages as links in the note. Create a Google Drive route folder only when files are worth preserving. Use the same route name across systems, retain an original GPX unchanged, and do not maintain duplicate working routes in Komoot and Outdooractive without a specific reason. A source link is sufficient for an early idea; archive the GPX when the route becomes a serious candidate, offline recovery matters, or the source is fragile. Archive downloadable topo files under the route's source archive when lawful and useful for personal offline reference; otherwise retain the topo page link. Record stable research once and refresh only time-sensitive conditions, access, restrictions, transport, and accommodation before the trip.
 
 For skiing or splitboarding ideas adapted from ski itineraries, label the adaptation and leave terrain suitability, transitions, exit options, and current avalanche conditions as explicit review items unless verified.
 
