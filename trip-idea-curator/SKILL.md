@@ -45,9 +45,15 @@ Browse whenever current conditions, restrictions, route details, or recommendati
 Follow [the route-note schema](references/route-note-schema.md), adapting sections to the activity. Keep the result useful for quick review on a phone:
 
 - use frontmatter as the canonical owner for structured trip facts such as
-  `type`, `status`, `activity`, `style`, `duration_days`, `region`, `location`,
-  `intended_date`, `partners`, and `research_reviewed`; do not repeat those
-  facts in an introductory body list;
+  `type`, `status`, `activity`, `style`, `duration_days`, `difficulty`,
+  `region`, `location`, `intended_date`, `partners`, and `research_reviewed`;
+  do not repeat those facts in an introductory body list;
+- always include `difficulty`; record the published grading system with the
+  grade, preserve meaningful source disagreement or condition dependence, and
+  leave the value empty when no responsible overall grade is supported;
+- choose one primary `activity` from the controlled vocabulary documented in
+  the schema; classify by the trip's defining character rather than listing
+  every technique used;
 - put identity and decision-relevant facts first;
 - record `Suggested by` separately from the route publisher or inspiration source;
 - preserve original links and attribution;

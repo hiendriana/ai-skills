@@ -9,8 +9,9 @@ Use this as a flexible content model, not as mandatory boilerplate. Remove secti
 type: trip
 status: idea
 activity:
-  - climbing
+  - alpine-climbing
 duration_days: 1
+difficulty: "UIAA IV"
 style:
   - day-tour
   - multipitch
@@ -109,6 +110,44 @@ mountain, wall, trailhead, or route endpoints. Leave unknown scalar values
 empty and unknown list values as empty lists rather than guessing. Do not
 repeat frontmatter facts in an introductory body list; keep provenance,
 attributed assessments, caveats, and other nuanced context in the body.
+
+Choose one primary `activity` value:
+
+- `hiking`: hiking and mountain hiking where technical climbing, glacier
+  travel, or mountaineering equipment do not define the trip;
+- `splitboarding`: a splitboard tour without glacier travel (Skitour);
+- `splitboard-mountaineering`: a splitboard tour involving glacier travel and
+  its mountaineering requirements (Skihochtour);
+- `alpine-climbing`: alpine climbing where route-finding, sparse or mixed
+  protection, or alpine commitment helps define the route;
+- `plaisir-climbing`: multipitch climbing defined by generally good fixed
+  protection;
+- `sport-climbing`: single-pitch or crag sport climbing;
+- `ice-climbing`: waterfall or alpine ice climbing where climbing ice is the
+  primary objective;
+- `mountaineering`: Hochtouren and serious Bergsteigen where climbing is part
+  of the journey rather than the primary multipitch discipline; or
+- `via-ferrata`: a protected climbing route whose fixed cables and aids define
+  the activity.
+
+Classify the whole trip, not every technique it contains. Glacier travel on
+foot stays `mountaineering`; glacier travel during a splitboard tour becomes
+`splitboard-mountaineering`. Easy rock within a serious mountain journey does
+not make it `alpine-climbing`. An alpine approach or descent does not prevent a
+well-protected multipitch route from being `plaisir-climbing`. When a climbing
+route genuinely lies between `alpine-climbing` and `plaisir-climbing`, choose
+`alpine-climbing`; reserve `plaisir-climbing` for routes whose good fixed
+protection clearly defines their character. Use `style` independently for
+formats such as `multipitch`, `traverse`, `summit-tour`, or `multi-day`.
+Classify travel over snow or ice as `mountaineering` when it supports a broader
+mountain objective; use `ice-climbing` only when technical ice climbing is the
+defining objective.
+
+Always include `difficulty`. Store it as a concise text value containing the
+published grade and grading system, for example `UIAA IV`, `French 6a`, or
+`AD`. For a natural route combination, retain the relevant component grades or
+range. Preserve material disagreement and condition dependence in the value;
+leave it empty when the available evidence does not support an overall grade.
 
 Keep `Suggested by` distinct from `Inspiration`: the recommender may have forwarded a post written by someone else.
 
