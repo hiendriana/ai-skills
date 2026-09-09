@@ -5,11 +5,23 @@ Use this as a flexible content model, not as mandatory boilerplate. Remove secti
 ## Individual Route Idea
 
 ```markdown
+---
+type: trip
+status: idea
+activity:
+  - climbing
+duration_days: 1
+style:
+  - day-tour
+  - multipitch
+region:
+location:
+intended_date:
+partners: []
+research_reviewed:
+---
 # Route Name
 
-- **Status:** Idea
-- **Activity:** Multipitch climbing / mountaineering / hiking / splitboarding
-- **Location:** Area, region, country
 - **Suggested by:** Person who recommended it
 - **Inspiration:** [Publisher or post](URL)
 - **Personal review:** Not reviewed / Promising / Not suitable, with a short reason if known
@@ -89,6 +101,14 @@ Objective hazards, discrepancies between sources, ambiguous identification, and 
 - [Descriptive source title](URL) — what it supports; accessed YYYY-MM-DD when time-sensitive
 - [Original recommendation](URL) — inspiration or attributed experience
 ```
+
+Frontmatter is the canonical owner for sortable and filterable trip facts. Use
+`activity` for what is done and `style` for the trip format. Keep `region`
+broad enough for grouping and `location` precise enough to identify the
+mountain, wall, trailhead, or route endpoints. Leave unknown scalar values
+empty and unknown list values as empty lists rather than guessing. Do not
+repeat frontmatter facts in an introductory body list; keep provenance,
+attributed assessments, caveats, and other nuanced context in the body.
 
 Keep `Suggested by` distinct from `Inspiration`: the recommender may have forwarded a post written by someone else.
 

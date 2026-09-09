@@ -44,10 +44,15 @@ Browse whenever current conditions, restrictions, route details, or recommendati
 
 Follow [the route-note schema](references/route-note-schema.md), adapting sections to the activity. Keep the result useful for quick review on a phone:
 
+- use frontmatter as the canonical owner for structured trip facts such as
+  `type`, `status`, `activity`, `style`, `duration_days`, `region`, `location`,
+  `intended_date`, `partners`, and `research_reviewed`; do not repeat those
+  facts in an introductory body list;
 - put identity and decision-relevant facts first;
 - record `Suggested by` separately from the route publisher or inspiration source;
 - preserve original links and attribution;
-- use `Unknown` or a clear verification gap instead of filling missing facts;
+- leave unknown frontmatter values empty and use `Unknown` or a clear
+  verification gap in prose or tables instead of filling missing facts;
 - omit empty boilerplate sections;
 - do not add a task list or planning checklist unless the user explicitly requests one.
 
