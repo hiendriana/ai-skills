@@ -1,4 +1,4 @@
 interface:
   display_name: "Trip Idea Curator"
   short_description: "Research and organize outdoor trip ideas"
-  default_prompt: "Use $trip-idea-curator to research and organize these outdoor route suggestions in my knowledge base."
+  default_prompt: "Use $trip-idea-curator to research and organize these outdoor route suggestions according to this repository's trip policy."
