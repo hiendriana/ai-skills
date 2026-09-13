@@ -1,95 +1,74 @@
 ---
 name: trip-idea-curator
-description: Research and organize outdoor route and trip ideas in Danny's knowledge base, including source verification, recommendation collections, duplicate detection, provenance, and placement in the Ideas-to-Completed lifecycle. Use for climbing, mountaineering, hiking, splitboarding, and related outdoor suggestions. Do not use for completed-tour records or generic inbox processing without a trip component.
+description: Research and organize outdoor route and trip ideas in repositories that define their own trip policy, schema, templates, lifecycle, and indexes. Use for climbing, mountaineering, hiking, splitboarding, and related suggestions where source verification, duplicate detection, provenance, uncertainty, and current research matter.
 ---
 
 # Trip Idea Curator
 
-Turn links, captions, messages, rough route names, and collections of recommendations into concise, reviewable trip-idea notes. Preserve why an idea is interesting without presenting inspiration or historical reports as current safety information.
+Turn links, captions, messages, rough route names, and recommendation collections into reviewable trip-idea notes while preserving provenance, uncertainty, and the difference between inspiration and current safety information.
 
 ## Establish Repository Context
 
-1. Locate the knowledge repository containing `Knowledge Base/Outdoors/Trips/README.md`.
-2. Read the repository instructions, `Knowledge Base/README.md`, and the Trips README before proposing changes.
-3. Inspect existing notes and indexes for the route, destination, spelling variants, and source links before creating anything.
-4. Preserve unrelated working-tree changes. Do not commit unless the user explicitly asks.
+1. Read applicable `AGENTS.md`, README files, and repository-defined trip templates or schemas.
+2. Identify the repository-defined canonical owner, lifecycle, naming rules, structured properties, indexes, and templates.
+3. Inspect existing notes for the route, destination, spelling variants, and source links before creating anything.
+4. Preserve unrelated changes. Do not commit unless explicitly asked.
+5. If no durable trip owner or schema is defined, research and propose a note shape but do not invent a permanent repository hierarchy or lifecycle.
 
-If the input is an active inbox capture, use `knowledge-curator` when available for its proposal, integration, provenance, and processed-lifecycle workflow. This skill owns the trip-specific research and note shape; it does not independently mark or move inbox captures.
-
-## Choose the Durable Owner
-
-Use `Knowledge Base/Outdoors/Trips/` as the canonical owner:
-
-- `Ideas/` for every trip that has not happened yet, from an unreviewed suggestion to a detailed plan with dates or reservations.
-- `Completed/` only for completed-tour records; use the repository's completed-tour workflow instead of this skill.
-
-Keep adding research and preparation to the note in `Ideas/`; planning detail is not a separate lifecycle state. Move the note to `Completed/` only after the trip happens. Activity-specific pages may index or link to the canonical note but must not copy its detail.
-
-When several recommendations share a meaningful provenance, create a collection directory under `Ideas/`, such as `Route Suggestions from Jane Doe/`. Add a short `README.md` index and one Markdown file per distinct route or natural route combination. Merge multiple posts about the same route into one note while retaining every source.
-
-Use title case with spaces for human-facing filenames and directories. Follow any stricter local naming convention already in the repository.
+If the input is an active inbox capture, use the repository's generic curation workflow when available. This skill owns trip-specific research and note content; it does not independently manage generic inbox lifecycle.
 
 ## Research and Assess
 
-1. Identify the route precisely before writing. Keep ambiguous identifications explicit.
-2. Search current sources for location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant. For climbing routes, always search for available topos.
-3. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use detailed trip reports for attributed experience, not universal facts.
-4. Distinguish verified route facts, statements attributed to the recommender or publisher, the user's personal assessment, and unresolved or time-sensitive information.
-5. Treat historical posts, condition reports, grades, protection descriptions, and access details as planning context. State what needs current local verification.
-6. Never infer suitability, safety, or equipment requirements from sparse social-media material.
+1. Identify the route or destination precisely and keep ambiguity explicit.
+2. Research location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
+3. For climbing routes, search for available topos and compare useful versions.
+4. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use trip reports for attributed experience, not universal facts.
+5. Distinguish verified facts, attributed source claims, the user's personal assessment, and unresolved or time-sensitive information.
+6. Treat historical posts, condition reports, grades, protection descriptions, and access details as planning context. State what requires current local verification.
+7. Never infer suitability, safety, or equipment requirements from sparse social-media material.
+8. For skiing or splitboarding ideas adapted from ski itineraries, label the adaptation and leave terrain suitability, transitions, exit options, and current avalanche conditions as explicit review items unless verified.
 
-Browse whenever current conditions, restrictions, route details, or recommendations could have changed. Link directly to useful sources and include access dates when the information is time-sensitive.
+Browse whenever conditions, restrictions, route details, transport, accommodation, or recommendations could have changed. Link useful sources and include checked dates for time-sensitive information.
 
-## Write the Notes
+## Write or Update the Trip Note
 
-Follow [the route-note schema](references/route-note-schema.md), adapting sections to the activity. Keep the result useful for quick review on a phone:
+Follow the target repository's trip policy and template rather than a skill-owned schema.
 
-- use frontmatter as the canonical owner for structured trip facts such as
-  `type`, `status`, `activity`, `style`, `duration_days`, `difficulty`,
-  `region`, `location`, `intended_date`, `partners`, and `research_reviewed`;
-  do not repeat those facts in an introductory body list;
-- always include `difficulty`; record the published grading system with the
-  grade, preserve meaningful source disagreement or condition dependence, and
-  leave the value empty when no responsible overall grade is supported;
-- choose one primary `activity` from the controlled vocabulary documented in
-  the schema; classify by the trip's defining character rather than listing
-  every technique used;
-- put identity and decision-relevant facts first;
-- record `Suggested by` separately from the route publisher or inspiration source;
-- preserve original links and attribution;
-- leave unknown frontmatter values empty and use `Unknown` or a clear
-  verification gap in prose or tables instead of filling missing facts;
-- omit empty boilerplate sections;
-- do not add a task list or planning checklist unless the user explicitly requests one.
+- Use repository-defined structured properties exactly as documented.
+- Keep one canonical detailed owner for each trip when required; link from indexes instead of duplicating detail.
+- Prefer updating an existing canonical note over creating a near-duplicate.
+- Preserve `Suggested by`, inspiration/source attribution, and personal review as distinct concepts when supported by the repository model.
+- Preserve original links and attribution.
+- Record stable research once and distinguish information that must be re-verified before the trip.
+- Keep relevant unknowns explicit, but omit clearly irrelevant sections or rows instead of filling the note with boilerplate.
+- Do not add task lists unless requested or required by repository policy.
 
-Add a clear `Logistics` section when access information would help evaluate or execute the trip. Record the actual route start and end, useful ways to get there, parking or public-transport constraints, and return or shuttle needs. Include a direct Google Maps link to a verified trailhead, parking area, station, or other useful access point when available; label the point precisely and never substitute an imprecise search result for a confirmed location.
+### Logistics and accommodation
 
-For every multiday trip, add an `Accommodation` section with a compact night-by-night overview. Include only accommodation that shapes the itinerary: mountain huts, bivouacs, camps, staged trailheads, or a necessary pre-route or post-route stay. Do not recommend a generic hotel in the valley merely because lodging exists. For a single-day trip, include accommodation only when it materially affects access, an alpine start, transport, or route timing.
+Record useful start and end points, approach and descent, parking or public-transport constraints, return or shuttle needs, and time-sensitive restrictions. Include direct map links only to verified useful points.
 
-For route-based ideas, add a `Navigation and Track` section that makes prior work visible. Record the track source page, any preserved original GPX, the selected navigation master, the track's intended scope, review state, download date, and known caveats. Omit the section for destination-only ideas until a route exists.
+For time-sensitive access, transport, lift, hut, road, or restriction information, preserve the last known information with the date checked and clearly flag it for re-verification before the trip.
 
-For climbing routes, add a `Topos` section whenever topos are available. Retain multiple useful versions and sort them newest first. For every entry, record the date and what that date represents, such as creation, publication, guidebook edition, upload, page update, or photo date. Do not present a webpage date as the topo's creation date. Identify the format and scope, including whether it is a line topo, photo topo, overview, guidebook page, or on-site reference. Compare meaningful differences in line, grades, protection, variants, and descent rather than silently choosing one version. If no topo is found, state that outcome and name the principal sources checked.
+For multiday trips, record accommodation that shapes the itinerary. For single-day trips, include accommodation only when it materially affects access, an alpine start, transport, or timing.
 
-Use one owner for each kind of information:
+### Navigation and tracks
 
-- the trip note is the canonical research overview and links everything together;
-- the user's dedicated Google Drive account archives selected original GPX files, PDFs, topos, and other source files;
-- one selected service, normally Komoot or Outdooractive, owns the editable navigation route;
-- Suunto and the watch are deployment targets, not durable archives.
+For route-based ideas, record navigation and track information when repository policy supports it. Preserve the source and intended scope of original tracks, distinguish source archives from editable navigation masters, and keep caveats visible. A track is supporting navigation data, not proof that a route is correct, safe, or currently passable.
 
-Keep ordinary webpages as links in the note. Create a Google Drive route folder only when files are worth preserving. Use the same route name across systems, retain an original GPX unchanged, and do not maintain duplicate working routes in Komoot and Outdooractive without a specific reason. A source link is sufficient for an early idea; archive the GPX when the route becomes a serious candidate, offline recovery matters, or the source is fragile. Archive downloadable topo files under the route's source archive when lawful and useful for personal offline reference; otherwise retain the topo page link. Record stable research once and refresh only time-sensitive conditions, access, restrictions, transport, and accommodation before the trip.
+### Topos
 
-For skiing or splitboarding ideas adapted from ski itineraries, label the adaptation and leave terrain suitability, transitions, exit options, and current avalanche conditions as explicit review items unless verified.
+For climbing routes, retain multiple useful topo versions when they add information. Record the date and what it represents, a separate format and scope (for example line topo, photo topo, overview, guidebook page, or on-site reference), and meaningful differences in line, grades, protection, variants, and descent. Do not present a webpage or photo date as the topo's creation date. If no useful topo is found, state that and name the principal sources checked.
 
-## Update Navigation and Validate
+## Collections and Provenance
 
-Update the Trips index and only the relevant activity index or collection README. Keep one detailed owner and link elsewhere.
+When recommendations share meaningful provenance, follow the repository's collection convention if one exists. Keep one canonical route note per distinct route or natural combination, merge duplicate suggestions, and retain useful source and recommender attribution.
 
-Before finishing:
+## Transition to Completed Trips
 
-1. Inspect the final diff and working-tree status.
-2. Verify relative links and referenced paths.
-3. Confirm that each route has one canonical note.
-4. Check that sources support the stated facts and that uncertainty remains visible.
-5. Confirm no private values, credentials, duplicated detail, or placeholder pages were introduced.
-6. Report what was created or changed, what remains uncertain, and whether anything was intentionally left uncommitted.
+If repository policy moves ideas into a completed-tour lifecycle, preserve useful research and planning decisions while adding what actually happened. Replace predictions with observed outcomes where possible, retain useful differences between expected and actual conditions or timing, and remove obsolete planning detail.
+
+Do not perform the lifecycle transition unless repository policy and the user request authorize it.
+
+## Validate
+
+Update only repository-defined indexes or views necessary for the change. Before finishing, inspect the diff and working-tree status, verify links and paths, confirm canonical ownership, check source support and visible uncertainty, confirm time-sensitive facts have checked dates and re-verification warnings where appropriate, and check that no private values, credentials, duplicated detail, or placeholder pages were introduced. Report what changed and what remains uncertain. Do not claim a validation passed unless it was actually performed.
