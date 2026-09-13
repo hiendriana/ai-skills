@@ -1,9 +1,9 @@
 ---
-name: trip-idea-curator
+name: outdoor-trip-curator
 description: Research and organize outdoor route and trip ideas in repositories that define their own trip policy, schema, templates, lifecycle, and indexes. Use for climbing, mountaineering, hiking, splitboarding, and related suggestions where source verification, duplicate detection, provenance, uncertainty, and current research matter.
 ---
 
-# Trip Idea Curator
+# Outdoor Trip Curator
 
 Turn links, captions, messages, rough route names, and recommendation collections into reviewable trip-idea notes while preserving provenance, uncertainty, and the difference between inspiration and current safety information.
 
