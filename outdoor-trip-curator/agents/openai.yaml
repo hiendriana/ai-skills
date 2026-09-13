@@ -1,0 +1,4 @@
+interface:
+  display_name: "Outdoor Trip Curator"
+  short_description: "Research and organize outdoor trips"
+  default_prompt: "Use $outdoor-trip-curator to research and organize these outdoor route suggestions according to this repository's trip policy."
