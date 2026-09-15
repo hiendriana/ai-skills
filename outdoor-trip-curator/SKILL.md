@@ -20,7 +20,7 @@ If the input is an active inbox capture, use the repository's generic curation w
 ## Research and Assess
 
 1. Identify the route or destination precisely and keep ambiguity explicit.
-2. Research location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
+2. Research repository-defined structured properties when they are relevant and can be established reliably, plus location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
 3. For climbing routes, search for available topos and compare useful versions.
 4. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use trip reports for attributed experience, not universal facts.
 5. Distinguish verified facts, attributed source claims, the user's personal assessment, and unresolved or time-sensitive information.
