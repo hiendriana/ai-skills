@@ -44,6 +44,8 @@ Review every `integrated_into` destination without extracting new knowledge.
 Unresolved OCR or visual limitations block removal when they leave integration
 completeness uncertain. Empty OCR alone is not a blocker when the processed
 record establishes that the image contained no meaningful text.
+Verify extraction and integration coverage for each member where policy requires
+it; an existing destination file alone is insufficient.
 
 ## Review and removal
 

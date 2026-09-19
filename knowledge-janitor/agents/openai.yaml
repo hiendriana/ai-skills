@@ -1,4 +1,4 @@
 interface:
   display_name: "Knowledge Janitor"
   short_description: "Audit note and attachment lifecycles"
-  default_prompt: "Use $knowledge-janitor in non-destructive audit mode to review Markdown captures and manifested PDF or image bundles; require exact-member approval before moving or removing anything."
+  default_prompt: "Use $knowledge-janitor in complete non-destructive audit mode. Follow repository policy, verify lifecycle and hygiene gates, and report evidence-backed findings without modifying the repository."
