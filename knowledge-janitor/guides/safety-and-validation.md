@@ -2,6 +2,23 @@
 
 Keep audits read-only and apply runs narrowly authorized.
 
+## Audit reporting
+
+Enumerate active captures, all processed captures, eligible candidates, unique
+blocked captures, and bundles before computing totals. Reconcile those sets
+with retention-, metadata-, destination-, and inbound-link-blocked counts and
+hygiene findings. Gate counts may overlap across unique blocked captures.
+For each blocked capture, list every failed gate with exact evidence; do not
+use a bare "ineligible" label. If any total cannot be reconciled, mark the
+audit incomplete instead of publishing inconsistent totals.
+
+Before finishing audit mode, check and report whether the repository is
+unchanged, the working tree and index were checked, no unrelated file was
+created or changed, counts reconcile, every eligible removal passed every
+applicable gate, blocked captures name failed gates, policy exceptions were
+honored, processed provenance was not treated as ordinary durable knowledge,
+and no destructive action occurred. Do not claim an unperformed check passed.
+
 ## Approval boundary
 
 - Audit and proposal mode is always the default.

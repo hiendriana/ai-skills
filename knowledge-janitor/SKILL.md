@@ -19,6 +19,8 @@ changing anything.
   capture.
 - Treat a general cleanup request as audit/proposal mode, never removal approval.
 - Never commit unless separately requested.
+- Keep retained processed captures intact as historical provenance. Do not
+  create or integrate durable knowledge to make a capture removable.
 - Fail closed on ambiguous path scope, lifecycle state, Git evidence,
   destinations, integration, links, working-tree state, retention, or approval.
 
@@ -77,10 +79,10 @@ For a bundle, also verify the manifest, declared membership, media types, byte
 sizes, SHA-256 values, extraction coverage, inbound links to every member, and
 tracking and commit evidence for every member.
 
-Audit durable knowledge for broken links, orphaned pages, duplicate ownership,
-stale indexes, conflicting claims, missing provenance, sensitive values,
-obsolete paths, and invalid metadata. Do not rewrite for stylistic preference
-or call content outdated without evidence.
+Audit durable knowledge for broken links, missing required navigation, duplicate
+ownership, stale indexes, conflicting claims, missing provenance, sensitive
+values, obsolete paths, and invalid metadata. Do not rewrite for stylistic
+preference or call content outdated without evidence.
 
 ## Report
 
@@ -95,6 +97,11 @@ In audit or review mode, report:
 7. lifecycle, link, ownership, drift, provenance, or sensitive-data findings;
 8. proposed actions ordered by risk;
 9. exact actions requiring explicit approval.
+
+Use the finding categories in the hygiene guide. Derive summary counts from
+the final enumerated captures, bundles, and findings; reconcile unique blocked
+captures separately from overlapping failed-gate counts. If counts do not
+reconcile, say the audit is incomplete.
 
 For every bundle, report its exact directory and member paths, hash results,
 extraction limitations, and eligibility evidence for every member.

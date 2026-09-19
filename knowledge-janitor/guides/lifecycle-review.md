@@ -17,6 +17,13 @@ Protect pending, `needs-review`, rejected, untracked, and never-committed
 captures from removal in every mode. Treat a manifested bundle as one capture
 and apply every gate to every member.
 
+An intact capture in a documented `processed/` recycle bin is immutable
+historical provenance while retained. Do not propose rewriting or redacting it
+because its contents would be unsuitable for ordinary durable knowledge.
+Sensitive content alone is not a reason to change that processed copy. Report
+an applicable policy requirement for earlier action if one exists; otherwise
+prefer the normal lifecycle removal workflow.
+
 ## Policy and path gate
 
 Before proposing a move or removal, verify that repository policy explicitly:
@@ -36,9 +43,10 @@ passes:
 
 - the exact file is inside a repository-documented processed capture directory;
 - lifecycle status is `processed`;
-- every repository-relative `integrated_into` destination exists;
-- destination review shows the selected integration is complete without
-  extracting new knowledge from the capture;
+- every `integrated_into` destination resolves under applicable repository
+  policy or an evidenced historical convention, and exists;
+- comparison with the destination content verifies that useful durable
+  knowledge was integrated, without new extraction or curation;
 - no unresolved conflict, question, manual review requirement, or provenance
   problem remains;
 - no inbound repository link would break;
@@ -56,12 +64,41 @@ applicable check. One failed member makes the complete bundle ineligible.
 Status, age, apparent duplication, or a populated `processing_commit` field is
 never sufficient by itself. Verify the referenced commit and its relevant
 contents. When any evidence is missing, classify the capture as ineligible and
-state what must be resolved.
+state every failed gate and its exact evidence. Count a capture once in the
+unique blocked total even when several gates fail.
+
+## Destination evidence
+
+Do not assume `integrated_into` is relative to the capture directory or apply
+the current preferred prefix to historical values. Determine path semantics
+from repository policy and, where policy permits, resolvable sibling captures
+and historical usage. Record the rule and evidence used. Distinguish an invalid
+or unresolvable value from an older valid value and from a resolvable value
+that merely differs from today's preferred convention. A missing `vault/` or
+other current prefix alone proves none of these. If multiple interpretations
+remain possible, block removal for ambiguous destination metadata.
+
+For example, if policy or consistent historical records establish that
+`Notes/Topic.md` resolves from a former content root and that destination
+exists, record that convention and review its content; do not label the path
+invalid merely because newer captures use `vault/Notes/Topic.md`.
+
+Existence alone does not prove integration. Inspect each recorded destination
+against the processed record sufficiently to establish that its useful durable
+knowledge is present and that no unresolved question, conflict, review, or
+provenance issue remains. If this would require new extraction, interpretation,
+or curation, block removal and route it to `knowledge-curator`. A metadata
+correction may be proposed only when the actual durable destination already
+exists and evidence identifies it. Never create a missing note or synthesize
+content to satisfy an eligibility gate.
 
 ## Review and approval sequence
 
-1. Report each exact candidate path, every eligibility result, retention result,
-   inbound-link result, and the commit identifier and path that prove recovery.
+1. Report each exact candidate path, `status: processed`, lifecycle dates,
+   elapsed retention, every resolved destination and its existence and
+   integration evidence, unresolved issues, inbound links, tracking, working
+   tree and index state, and the commit identifier and exact processed path
+   that prove recovery.
 2. Explain what provenance or reprocessing convenience removal will discard
    from the working tree.
 3. Make no change during the deletion review.
