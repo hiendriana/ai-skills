@@ -8,8 +8,9 @@ Review capture state without curating captured knowledge.
   active inbox. Propose exact moves into its documented `processed/` directory.
 - **Recycle-bin review:** evaluate captures already inside a documented
   `processed/` directory for retention or removal eligibility.
-- **Approved recycle-bin removal:** remove only exact eligible files after a
-  deletion review and later file-specific approval.
+- **Authorized recycle-bin removal:** remove only exact eligible files after a
+  deletion review, under later file-specific approval or explicit scheduled PR
+  authorization in repository policy.
 - **General knowledge hygiene:** keep unrelated links, metadata, ownership, and
   duplication work separate from capture removal.
 
@@ -116,7 +117,7 @@ incomplete, classify the capture as blocked and route the work to
 `knowledge-curator`; do not propose a new destination page or other durable
 knowledge as a janitor repair.
 
-## Review and approval sequence
+## Review and authorization sequence
 
 1. Report each exact candidate path, `status: processed`, lifecycle dates,
    elapsed retention, every recorded destination, its resolved historical and
@@ -125,12 +126,14 @@ knowledge as a janitor repair.
    identifier and exact processed path that prove recovery.
 2. Explain what provenance or reprocessing convenience removal will discard
    from the working tree.
-3. Make no change during the deletion review.
-4. Require a later approval naming each exact file, including every member of a
-   bundle. Broad approval such as "clean my inbox" or a bundle directory alone
-   is insufficient.
-5. Immediately before removal, repeat all gates and stop if repository state or
-   evidence changed.
+3. For manual removal, make no change during deletion review. Require later
+   approval naming each exact file, including every bundle member. Broad
+   approval such as "clean my inbox" or a bundle directory is insufficient.
+4. For scheduled PR preparation, verify that repository policy explicitly grants
+   standing authorization to the configured task and defines the dedicated
+   branch and PR workflow. If either is absent or ambiguous, audit only.
+5. Immediately before either removal mode, repeat all gates and stop if
+   repository state or evidence changed. Leave every blocked capture untouched.
 
 ## Recoverability evidence
 
@@ -143,5 +146,6 @@ to be removed.
 For a bundle, record this evidence for `capture.md` and every declared source
 file at their exact processed paths.
 
-Removal itself is a working-tree change until committed. Report that distinction
-and never create the removal commit unless explicitly requested.
+Removal itself is a working-tree change until committed. Create a removal commit
+only when separately requested or explicitly authorized for scheduled PR
+preparation by repository policy.

@@ -13,8 +13,8 @@ lifecycle capture, regardless of its number of physical files. Report total
 captures, single-file captures, bundle captures, eligible captures, and blocked
 captures. Reconcile `total captures = single-file captures + bundle captures`
 and `total captures = eligible captures + blocked captures`. Report the exact
-physical file paths represented by eligible captures separately for later
-file-specific approval;
+physical file paths represented by eligible captures separately for the
+applicable authorization and PR review;
 do not add bundle members to lifecycle capture counts.
 For each blocked capture, list every failed gate with exact evidence; do not
 use a bare "ineligible" label. If any total cannot be reconciled, mark the
@@ -51,10 +51,12 @@ audit incomplete when any check fails.
 - Audit and proposal mode is always the default.
 - Moving a misplaced processed capture requires an approved exact path and a
   repository-documented recycle-bin policy.
-- Removal requires a completed deletion review followed by later file-specific
-  approval for every exact path.
-- Bundle removal requires approval for the manifest and every declared member;
-  never infer approval for members from a directory name.
+- Manual removal requires a completed deletion review followed by later
+  file-specific approval for every exact path, including every bundle member.
+- Scheduled removal requires repository policy explicitly authorizing the
+  configured task to prepare a dedicated non-default branch and PR. It does not
+  authorize direct default-branch changes, automatic merge, or unrelated work.
+  Never infer authorization for bundle members from a directory name.
 - Hygiene changes require exact named actions or files from a reviewed plan.
 - A request to clean, tidy, organize, fix everything, or use best judgment never
   authorizes movement or removal.
@@ -63,28 +65,45 @@ Before applying, recheck Git status, paths, lifecycle metadata, destinations,
 integration completeness, links, retention, commit evidence, and the approved
 target list. Stop if repository state invalidates or obscures the plan.
 
+For scheduled removal, start from a clean, current default-branch base and use
+a new dedicated branch. Verify remote and branch identity, existing PRs, and
+that push or PR creation cannot overwrite unrelated work. If the working tree,
+index, base, branch, remote, or PR workflow is ambiguous, audit only. Do not
+repair metadata or provenance merely to make a capture eligible. Do not curate,
+create durable knowledge, or include unrelated hygiene changes. After a complete
+audit, recheck every eligibility gate immediately before each exact-path
+removal. Leave blocked captures untouched and report every failed gate.
+
 ## Removal mechanism
 
 Use only the repository's documented recoverable version-control workflow. In
 a Git repository, an explicitly documented workflow may use an exact-path form
 such as `git rm -- path/to/capture.md`, but only for a single reviewed and
-approved file or an explicit list of individually approved files.
+authorized file or an explicit list of individually authorized files.
 
 Never use filesystem `rm`, destructive globs, recursive directory deletion,
-`git clean`, broad pathspecs, `git reset --hard`, rebase, filter-branch,
+`git clean`, broad pathspecs, reset, rebase, filter-branch,
 filter-repo, or other history rewriting. Never remove an ineligible capture as
-an incidental cleanup step. Do not commit unless separately requested.
+an incidental cleanup step. Commit only when separately requested or explicitly
+authorized for scheduled PR preparation. Never merge automatically.
 
-After approved removal of every member of a reviewed bundle, permit only a
-nonrecursive empty-directory operation on that exact bundle directory. Verify it
-is empty immediately first; stop if it contains any entry. This cleanup removes
-no capture data and does not replace exact-member approval.
+After exact-path removal of every authorized bundle member, leave any empty
+directory to Git; never remove a nonempty directory or an unreviewed file.
+
+For a scheduled PR, use a title identifying scheduled janitor cleanup. The PR
+description lists every removed capture and bundle member, recovery commit and
+path evidence, retention, destination and integration, and inbound-link results,
+all blocked captures and their failed gates, and states that no merge occurred.
+If no eligible removal exists, report the audit without an empty PR. Distinguish
+eligible captures removed into the PR, eligible captures not removed with
+reasons, blocked captures, physical bundle members, and recovery evidence.
 
 ## Final validation
 
-After an approved move, removal, or hygiene change:
+After an authorized move, removal, or hygiene change:
 
-1. confirm every changed or removed path was explicitly approved and in scope;
+1. confirm every changed or removed path had the applicable authorization and
+   was in scope;
 2. verify lifecycle state, destination existence, integration completeness, and
    commit evidence for every removed capture;
 3. resolve relative links and referenced paths and verify no inbound link broke;

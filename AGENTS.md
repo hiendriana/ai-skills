@@ -37,7 +37,9 @@ requirements. Do not invent prospective formats such as `claude.yaml`.
 - Keep each Skill narrowly focused.
 - Prefer updating existing guidance over creating overlapping documents.
 - Do not modify unrelated Skills during a focused change.
-- Preserve non-destructive defaults and explicit-approval boundaries.
+- Preserve non-destructive defaults and explicit-approval boundaries, except
+  where an applicable repository policy explicitly authorizes a scheduled
+  branch-and-PR preparation workflow. Such a workflow never authorizes merge.
 - Keep reporting and validation instructions consistent with actual behavior.
 - Avoid references to files that do not exist in the installed Skill.
 - When a change affects installation, usage, behavior, safety, dependencies,
