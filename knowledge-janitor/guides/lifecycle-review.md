@@ -47,8 +47,9 @@ passes:
 
 - the exact file is inside a repository-documented processed capture directory;
 - lifecycle status is `processed`;
-- every `integrated_into` destination resolves under applicable repository
-  policy or an evidenced historical convention, and exists;
+- every `integrated_into` value resolves under applicable repository policy or
+  an evidenced historical convention to an existing destination, directly or
+  through a verified later move of that destination;
 - comparison with the destination content verifies that useful durable
   knowledge was integrated, without new extraction or curation;
 - no unresolved conflict, question, manual review requirement, or provenance
@@ -92,7 +93,18 @@ For example, if policy or consistent historical records establish that
 exists, record that convention and review its content; do not label the path
 invalid merely because newer captures use `vault/Notes/Topic.md`.
 
-Existence alone does not prove integration. Inspect each recorded destination
+If a destination was moved after the capture was processed, trace the recorded
+path through committed Git history to the current file and corroborate its
+identity and content. Record the original value, the resolved historical path,
+the move evidence, and the current repository-relative path separately. A
+matching title, similar content, or guessed rename is insufficient. If the
+chain is missing or ambiguous, block removal for unresolved destination
+evidence. A literal link to the old path may remain broken; it does not by
+itself require the old path to exist when the move and current integration are
+proven. Preserve the processed capture's original provenance rather than
+rewriting its historical link solely to pass eligibility.
+
+Existence alone does not prove integration. Inspect each current destination
 against the processed record sufficiently to establish that its useful durable
 knowledge is present and that no unresolved question, conflict, review, or
 provenance issue remains. If this would require new extraction, interpretation,
@@ -107,10 +119,10 @@ knowledge as a janitor repair.
 ## Review and approval sequence
 
 1. Report each exact candidate path, `status: processed`, lifecycle dates,
-   elapsed retention, every resolved destination and its existence and
-   integration evidence, unresolved issues, inbound links, tracking, working
-   tree and index state, and the commit identifier and exact processed path
-   that prove recovery.
+   elapsed retention, every recorded destination, its resolved historical and
+   current paths when moved, move and integration evidence, unresolved issues,
+   inbound links, tracking, working tree and index state, and the commit
+   identifier and exact processed path that prove recovery.
 2. Explain what provenance or reprocessing convenience removal will discard
    from the working tree.
 3. Make no change during the deletion review.

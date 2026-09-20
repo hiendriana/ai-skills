@@ -10,6 +10,11 @@ normal knowledge curation.
   reporting a broken link. An intentional placeholder in a template, such as
   `[Topo](URL)`, is `no action required` when repository structure establishes
   that role.
+- For a retained processed capture, distinguish a broken literal link to an
+  older destination from missing integration. Report the stale historical
+  reference with the verified current path and move evidence when available;
+  preserve the capture's provenance and apply the lifecycle destination gate
+  separately.
 - Report a navigation gap only when repository policy or structure establishes
   an expected owner or index and its relationship is missing or wrong. Name the
   page, expected owner/index, missing relationship, and evidence for it. Zero

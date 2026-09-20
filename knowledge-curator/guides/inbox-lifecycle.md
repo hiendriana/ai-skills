@@ -82,3 +82,10 @@ Skip processed captures during ordinary enumeration. On an explicit revisit,
 verify every `integrated_into` destination and add only genuinely missing
 knowledge. Never duplicate claims, repeat a completed move, or clear destination
 history merely because another destination is added.
+If a recorded destination moved later, trace the old path to the current owner
+using committed history and verify its content before proposing any change.
+Preserve the original capture and destination history. If the move cannot be
+traced or useful knowledge is absent from the current owner, propose an
+evidence-backed integration or owner decision through the normal curator review
+and approval workflow; do not infer coverage from a similar title or silently
+mark the processed capture ready for janitor removal.
