@@ -8,6 +8,14 @@ Enumerate active captures, all processed captures, eligible candidates, unique
 blocked captures, and bundles before computing totals. Reconcile those sets
 with retention-, metadata-, destination-, and inbound-link-blocked counts and
 hygiene findings. Gate counts may overlap across unique blocked captures.
+For a recycle-bin eligibility review, count each manifested bundle as one
+lifecycle capture, regardless of its number of physical files. Report total
+captures, single-file captures, bundle captures, eligible captures, and blocked
+captures. Reconcile `total captures = single-file captures + bundle captures`
+and `total captures = eligible captures + blocked captures`. Report the exact
+physical file paths represented by eligible captures separately for later
+file-specific approval;
+do not add bundle members to lifecycle capture counts.
 For each blocked capture, list every failed gate with exact evidence; do not
 use a bare "ineligible" label. If any total cannot be reconciled, mark the
 audit incomplete instead of publishing inconsistent totals.
