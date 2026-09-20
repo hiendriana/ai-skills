@@ -1,6 +1,6 @@
 ---
 name: knowledge-janitor
-description: Audit capture lifecycle and general hygiene in personal knowledge repositories containing Markdown captures and manifested PDF or image bundles, including active-inbox cleanup, processed recycle-bin review, and exact-file Git-recoverable removal after explicit approval. Use when Codex is asked to review processed, rejected, or needs-review captures; identify eligible bundle or note removal candidates; find broken links, stale indexes, duplication, drift, metadata defects, provenance gaps, or sensitive values; or apply an explicitly approved recycle-bin removal or hygiene plan without curating pending knowledge.
+description: Audit capture lifecycle and general hygiene in personal knowledge repositories containing Markdown captures and manifested PDF or image bundles, including active-inbox cleanup, processed recycle-bin review, and exact-file Git-recoverable removal under explicit approval or repository-authorized scheduled PR preparation. Use when Codex is asked to review processed, rejected, or needs-review captures; identify eligible bundle or note removal candidates; find broken links, stale indexes, duplication, drift, metadata defects, provenance gaps, or sensitive values; or apply an authorized recycle-bin removal or hygiene plan without curating pending knowledge.
 ---
 
 # Knowledge Janitor
@@ -18,7 +18,8 @@ changing anything.
   recycle-bin and recoverable removal workflow before moving or removing a
   capture.
 - Treat a general cleanup request as audit/proposal mode, never removal approval.
-- Never commit unless separately requested.
+- Never commit unless separately requested or repository policy explicitly
+  authorizes a scheduled removal commit solely for PR preparation.
 - Keep retained processed captures intact as historical provenance. Do not
   create or integrate durable knowledge to make a capture removable.
 - Fail closed on ambiguous path scope, lifecycle state, Git evidence,
@@ -55,12 +56,15 @@ Audit entries under documented `processed/` capture directories. Verify the
 eligibility gates in the lifecycle guide and report exact candidates before any
 change. This is the default for requests to clean or review processed captures.
 
-### Approved recycle-bin removal
+### Authorized recycle-bin removal
 
-Remove only exact files that passed a prior deletion review and then received
-file-specific approval. Recheck every gate immediately before removal and use
-only the repository's documented recoverable version-control workflow. Do not
-commit unless separately requested.
+Use either later file-specific interactive approval or explicit repository-policy
+standing authorization for a specifically configured scheduled task. The latter
+permits only a dedicated non-default branch, exact eligible removals, a commit,
+and a PR for human review; it never permits direct default-branch changes or
+merge. Recheck every gate immediately before removal. Follow the lifecycle and
+safety guides for authorization and Git workflow. Never infer scheduled
+authorization from a general cleanup request.
 
 ### General knowledge hygiene
 
@@ -96,7 +100,8 @@ In audit or review mode, report:
 6. retention findings;
 7. lifecycle, link, ownership, drift, provenance, or sensitive-data findings;
 8. proposed actions ordered by risk;
-9. exact actions requiring explicit approval.
+9. exact actions requiring interactive approval or covered by explicit
+   scheduled PR authorization.
 
 Use the finding categories in the hygiene guide. Derive summary counts from
 the final enumerated captures, bundles, and findings; reconcile unique blocked
@@ -106,7 +111,7 @@ reconcile, say the audit is incomplete.
 For every bundle, report its exact directory and member paths, hash results,
 extraction limitations, and eligibility evidence for every member.
 
-After approved removal, additionally report every removed path, its approval,
-the commit evidence that preserves its contents, the documented workflow used,
-all files modified, actions intentionally not applied, and every validation
-result. Do not claim a check passed unless it ran.
+After authorized removal, additionally report every removed path, its
+authorization mode, the commit evidence that preserves its contents, the
+documented workflow used, all files modified, actions intentionally not applied,
+and every validation result. Do not claim a check passed unless it ran.

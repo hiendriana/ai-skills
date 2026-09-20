@@ -63,11 +63,12 @@ member path with its hash, link, Git, destination, and retention result. Explain
 that removal discards the convenient working-tree copy of the original source
 and its provenance manifest.
 
-Require later approval naming every exact member path. Approval of a directory,
-one member, or a broad cleanup is insufficient. Immediately before removal,
-repeat every gate and use only the repository's documented recoverable Git
-workflow with the approved exact file list. Never use a recursive directory
-deletion or a broad pathspec. After all approved members are removed, verify the
-exact reviewed bundle directory is empty and remove that directory with a
-nonrecursive empty-directory operation. This removes no capture data and needs
-no separate approval; stop if any entry remains.
+For manual removal, require later approval naming every exact member path;
+approval of a directory, one member, or broad cleanup is insufficient. For
+repository-authorized scheduled PR preparation, enumerate every member in the
+review and PR; standing authorization covers only members passing all gates.
+Immediately before removal, repeat every gate and use only the repository's
+documented recoverable Git workflow with the authorized exact file list. Never
+use a recursive directory deletion or broad pathspec. An empty directory may
+remain after Git removes its tracked members; never remove a nonempty directory
+or any unreviewed file.

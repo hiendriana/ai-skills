@@ -47,7 +47,9 @@ Skills should:
 - remain self-contained;
 - defer repository-specific policy and data models to the target repository;
 - be non-destructive by default;
-- require explicit approval for destructive actions;
+- require explicit approval for destructive actions, except narrowly scoped
+  scheduled branch-and-PR preparation explicitly authorized by the target
+  repository policy, with human review before merge;
 - produce clear validation and reporting output;
 - minimize platform-specific metadata;
 - remain portable across AI platforms whenever practical.
