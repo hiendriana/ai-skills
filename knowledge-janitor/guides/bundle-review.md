@@ -2,8 +2,11 @@
 
 Treat a directory containing `capture.md` with `capture_format: bundle-v1` as
 one indivisible capture. Support manifests declaring PDF, JPEG, PNG, and WebP
-source files. Do not extract new knowledge or rerun OCR during lifecycle review;
-route content curation back to `knowledge-curator`.
+source files. During lifecycle review, do not run new OCR, visual extraction, or
+source extraction merely to establish removal eligibility. Use existing
+manifest and integration evidence and the destination content. If coverage
+cannot be verified from that evidence, block the entire bundle and route the
+missing extraction or curation to `knowledge-curator`.
 
 ## Structural gate
 
@@ -46,6 +49,12 @@ completeness uncertain. Empty OCR alone is not a blocker when the processed
 record establishes that the image contained no meaningful text.
 Verify extraction and integration coverage for each member where policy requires
 it; an existing destination file alone is insufficient.
+Immediately before classifying the bundle eligible, repeat the inbound-link
+search for the directory, manifest, and every member. Previous repository
+evidence of an inbound dependency blocks eligibility until that dependency is
+resolved and the current link search is clear. A current inbound link blocks
+the entire bundle. Never list it as eligible while any current inbound link
+remains.
 
 ## Review and removal
 

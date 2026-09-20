@@ -16,6 +16,10 @@ Review capture state without curating captured knowledge.
 Protect pending, `needs-review`, rejected, untracked, and never-committed
 captures from removal in every mode. Treat a manifested bundle as one capture
 and apply every gate to every member.
+An untracked or never-committed processed capture is a lifecycle and provenance
+anomaly requiring review. Do not propose simply adding and committing it as a
+repair; that action does not establish the missing integration or lifecycle
+evidence.
 
 An intact capture in a documented `processed/` recycle bin is immutable
 historical provenance while retained. Do not propose rewriting or redacting it
@@ -60,6 +64,11 @@ passes:
 
 For a bundle, the exact manifest and every declared source file must pass every
 applicable check. One failed member makes the complete bundle ineligible.
+Immediately before classifying any capture eligible, repeat the inbound-link
+search for its exact path and, for bundles, every member and the directory.
+Previous repository evidence of an inbound dependency blocks eligibility until
+that dependency is resolved and the current link search is clear. Any current
+inbound link blocks eligibility, even if an earlier check found none.
 
 Status, age, apparent duplication, or a populated `processing_commit` field is
 never sufficient by itself. Verify the referenced commit and its relevant
@@ -90,7 +99,10 @@ provenance issue remains. If this would require new extraction, interpretation,
 or curation, block removal and route it to `knowledge-curator`. A metadata
 correction may be proposed only when the actual durable destination already
 exists and evidence identifies it. Never create a missing note or synthesize
-content to satisfy an eligibility gate.
+content to satisfy an eligibility gate. If durable content is missing or
+incomplete, classify the capture as blocked and route the work to
+`knowledge-curator`; do not propose a new destination page or other durable
+knowledge as a janitor repair.
 
 ## Review and approval sequence
 

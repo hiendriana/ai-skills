@@ -11,6 +11,17 @@ hygiene findings. Gate counts may overlap across unique blocked captures.
 For each blocked capture, list every failed gate with exact evidence; do not
 use a bare "ineligible" label. If any total cannot be reconciled, mark the
 audit incomplete instead of publishing inconsistent totals.
+Use the finding classes `confirmed issue`, `likely stale`,
+`needs source verification`, `organizational suggestion`, and
+`no action required` consistently in findings and proposed actions. Carry the
+exact audited path into each proposed action; do not reconstruct or substitute
+a similar path.
+
+Prefer validation that leaves the repository untouched throughout audit mode.
+Run only checks relevant to the audit, not unrelated test suites merely because
+they exist. Avoid commands that create `__pycache__`, `.pyc`, or other temporary
+artifacts in the repository. If a necessary validation creates them, remove
+only those known artifacts and report both creation and cleanup.
 
 Before finishing audit mode, check and report whether the repository is
 unchanged, the working tree and index were checked, no unrelated file was
@@ -18,6 +29,14 @@ created or changed, counts reconcile, every eligible removal passed every
 applicable gate, blocked captures name failed gates, policy exceptions were
 honored, processed provenance was not treated as ordinary durable knowledge,
 and no destructive action occurred. Do not claim an unperformed check passed.
+As a final consistency check, reconcile all counts; compare every
+proposed-action path byte for byte with its finding; confirm no proposed action
+creates or integrates durable knowledge or otherwise crosses into
+`knowledge-curator` responsibility; confirm intentional template placeholders
+are not called broken links; confirm no OCR, visual extraction, or source
+extraction was performed merely for eligibility; and confirm every eligible
+removal candidate has zero current inbound links. Block eligibility or mark the
+audit incomplete when any check fails.
 
 ## Approval boundary
 

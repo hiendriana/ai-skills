@@ -6,7 +6,10 @@ normal knowledge curation.
 ## Structural checks
 
 - Resolve relative Markdown links from their containing files, including
-  anchors when practical.
+  anchors when practical. Check a file's role and repository conventions before
+  reporting a broken link. An intentional placeholder in a template, such as
+  `[Topo](URL)`, is `no action required` when repository structure establishes
+  that role.
 - Report a navigation gap only when repository policy or structure establishes
   an expected owner or index and its relationship is missing or wrong. Name the
   page, expected owner/index, missing relationship, and evidence for it. Zero
