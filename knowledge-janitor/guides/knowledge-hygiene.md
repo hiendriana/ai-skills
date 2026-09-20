@@ -36,8 +36,12 @@ normal knowledge curation.
   a sensitive-data, credential, privacy, or policy violation, inspect applicable
   repository policy for explicit exceptions. An approved value in its approved
   canonical location is not a violation; a copy elsewhere may still violate a
-  location-specific exception. Do not treat an intact processed capture as
-  ordinary durable knowledge.
+  location-specific exception. Never reproduce a sensitive value in an audit
+  report, even when it already appears in the repository or policy permits it
+  in a canonical location. Report the affected path, type of information,
+  applicable policy or exception, and whether the occurrence is allowed or a
+  violation; redact the value itself. Do not treat an intact processed capture
+  as ordinary durable knowledge.
 - Use source dates, project references, and relevant Git history to identify
   drift risk. Age alone does not establish staleness; never invent current state.
 
