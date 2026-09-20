@@ -18,6 +18,7 @@ The goal is a library of durable, reusable AI Skills. Skills should remain large
 ├── knowledge-curator/
 ├── knowledge-janitor/
 ├── outdoor-trip-curator/
+├── snowboard-curator/
 └── repository-documentation-audit/
 ```
 
@@ -36,6 +37,7 @@ In particular, `agents/openai.yaml` is OpenAI-specific metadata. Add metadata fo
 - [`knowledge-curator`](knowledge-curator/SKILL.md) reviews and non-destructively processes Markdown notes and manifested PDF or image inbox bundles into durable domain knowledge while preserving originals, evidence, links, and uncertainty. Local PDF extraction and English/German OCR require Tesseract and Poppler tools.
 - [`knowledge-janitor`](knowledge-janitor/SKILL.md) audits lifecycle state and hygiene for Markdown captures and manifested PDF or image bundles and proposes or applies narrowly approved archival and cleanup work.
 - [`outdoor-trip-curator`](outdoor-trip-curator/SKILL.md) researches and organizes outdoor trips and route ideas while deferring repository-specific schemas, paths, lifecycle, indexes, and tooling conventions to the target repository.
+- [`snowboard-curator`](snowboard-curator/SKILL.md) researches exact snowboard models and seasons, creates or updates sourced reports, and adds personal sizing and a test plan when requested. Repository-specific locations and rider context stay with the destination repository.
 
 Platform compatibility should be inferred only from integration or metadata actually present in the relevant Skill.
 
