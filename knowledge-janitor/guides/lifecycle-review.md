@@ -137,11 +137,12 @@ knowledge as a janitor repair.
 
 ## Recoverability evidence
 
-Git recoverability requires proof from an existing commit, not merely a file in
-`processed/`, a tracked index entry, a staged addition, or an unverified hash in
-front matter. Record the verified commit identifier and repository-relative path
-for each candidate and confirm the committed blob contains the capture expected
-to be removed.
+Git recoverability requires proof from a pre-removal commit that contains the
+capture at its exact processed path, not the cleanup commit that deletes it,
+a file in `processed/`, a tracked index entry, a staged addition, or an
+unverified hash in front matter. Record that verified recovery commit and
+repository-relative path for each candidate and confirm the committed blob
+contains the capture expected to be removed.
 
 For a bundle, record this evidence for `capture.md` and every declared source
 file at their exact processed paths.

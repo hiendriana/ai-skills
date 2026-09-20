@@ -91,9 +91,22 @@ After exact-path removal of every authorized bundle member, leave any empty
 directory to Git; never remove a nonempty directory or an unreviewed file.
 
 For a scheduled PR, use a title identifying scheduled janitor cleanup. The PR
-description lists every removed capture and bundle member, recovery commit and
-path evidence, retention, destination and integration, and inbound-link results,
-all blocked captures and their failed gates, and states that no merge occurred.
+description gives the audit scope and reconciled capture counts; for every
+removed capture, it lists its exact path (every exact member path for a bundle),
+pre-removal recovery commit and processed path, retention result, destination
+resolution and integration-completeness result, and current inbound-link result.
+It also states the authorization mode, lists blocked captures and failed gates,
+summarizes validation, and states that no merge occurred. The recovery commit
+and path are safety evidence. The PR branch name, number, URL, and current head
+SHA are operational metadata that may change while the PR is open; none proves
+recoverability. A current cleanup branch/head or deletion commit SHA is
+optional and must not be a required or authoritative PR-description field.
+Keep the description valid after a follow-up commit when the reviewed removal
+set is unchanged. If that set changes, recheck all applicable lifecycle gates
+for the changed set and update the exact paths and evidence in the description;
+do not rely on the earlier audit. If only PR text or non-repository metadata
+changes, update that metadata without rerunning removal actions or changing the
+cleanup diff.
 If no eligible removal exists, report the audit without an empty PR. Distinguish
 eligible captures removed into the PR, eligible captures not removed with
 reasons, blocked captures, physical bundle members, and recovery evidence.
