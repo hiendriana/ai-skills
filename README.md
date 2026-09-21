@@ -15,6 +15,7 @@ The goal is a library of durable, reusable AI Skills. Skills should remain large
 ├── README.md
 ├── AGENTS.md
 ├── .gitignore
+├── book-curator/
 ├── knowledge-curator/
 ├── knowledge-janitor/
 ├── outdoor-trip-curator/
@@ -33,6 +34,7 @@ In particular, `agents/openai.yaml` is OpenAI-specific metadata. Add metadata fo
 
 ## Current Skills
 
+- [`book-curator`](book-curator/SKILL.md) identifies, deduplicates, imports, researches, and safely enriches book records while deferring schema, field ownership, controlled values, paths, templates, and views to the destination knowledge base.
 - [`repository-documentation-audit`](repository-documentation-audit/SKILL.md) audits and reorganizes repository documentation so topics have clear owners, useful knowledge is preserved, and documented claims match implementation.
 - [`knowledge-curator`](knowledge-curator/SKILL.md) reviews and non-destructively processes Markdown notes and manifested PDF or image inbox bundles into durable domain knowledge while preserving originals, evidence, links, and uncertainty. Local PDF extraction and English/German OCR require Tesseract and Poppler tools.
 - [`knowledge-janitor`](knowledge-janitor/SKILL.md) audits lifecycle state and hygiene for Markdown captures and manifested PDF or image bundles and proposes or applies narrowly approved archival and cleanup work.
