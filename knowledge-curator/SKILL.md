@@ -52,6 +52,14 @@ Capture -> Curate -> Validate -> Move to processed/ -> Commit -> Janitor review 
 6. Skip `processed` captures by default. If explicitly asked to revisit one,
    verify its destinations and do not reintegrate represented claims.
 7. Inspect Git status and preserve unrelated changes.
+8. Keep repository maintenance outside the curation scope. Remove temporary or
+   generated execution artifacts created by the workflow from the working tree
+   before completing the task, and never commit them; Python `__pycache__/`
+   directories and `*.pyc` files are examples, not an exhaustive list. Do not
+   modify `.gitignore` or other repository-wide configuration solely to
+   accommodate such artifacts unless that change is explicitly in scope.
+   Instead, report a missing ignore rule that is likely to cause recurring
+   pollution as a recommended repository-maintenance change.
 
 ### 2. Select the mode
 
