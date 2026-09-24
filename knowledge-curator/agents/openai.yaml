@@ -1,4 +1,0 @@
-interface:
-  display_name: "Knowledge Curator"
-  short_description: "Curate notes, PDFs, and images safely"
-  default_prompt: "Use $knowledge-curator in proposal mode to review pending Markdown and manifested PDF or image captures before registration, integration, or any processed/ move."

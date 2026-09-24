@@ -1,12 +1,23 @@
 # Reusable AI Skills
 
-This repository contains reusable AI Skills for recurring documentation and knowledge-management work. The checked-out repository is also the live Skill installation: compatible AI tools discover Skills directly from this directory.
+This repository contains reusable AI Skills whose maintenance lifecycle genuinely
+spans repositories. The checked-out repository is also the live Skill
+installation: compatible AI tools discover Skills directly from this directory.
 
 For that reason, each Skill remains directly under the repository root. There is no intermediate `skills/` directory.
 
 ## Repository Philosophy
 
-The goal is a library of durable, reusable AI Skills. Skills should remain largely platform-neutral. Platform-specific metadata should be small and isolated, while workflows and supporting guidance remain portable where practical. Repository-specific paths, schemas, lifecycle rules, and personal tooling conventions belong in the repository that owns them rather than in reusable Skills.
+Design Skills for reuse, organize repositories around change boundaries, and
+keep AI-provider integration at the edges. Portability alone does not determine
+ownership: a reusable Skill whose behavior changes with one repository may live
+with that repository. Skills retained here should have a genuinely
+cross-repository lifecycle.
+
+Skill behavior should remain provider-neutral where practical. Provider-specific
+metadata should be small and isolated rather than defining the architecture.
+Destination repositories continue to own their paths, schemas, lifecycle rules,
+and personal tooling conventions.
 
 ## Repository layout
 
@@ -15,11 +26,6 @@ The goal is a library of durable, reusable AI Skills. Skills should remain large
 ├── README.md
 ├── AGENTS.md
 ├── .gitignore
-├── book-curator/
-├── knowledge-curator/
-├── knowledge-janitor/
-├── outdoor-trip-curator/
-├── snowboard-curator/
 └── repository-documentation-audit/
 ```
 
@@ -34,12 +40,12 @@ In particular, `agents/openai.yaml` is OpenAI-specific metadata. Add metadata fo
 
 ## Current Skills
 
-- [`book-curator`](book-curator/SKILL.md) identifies, deduplicates, imports, researches, and safely enriches book records while deferring schema, field ownership, controlled values, paths, templates, and views to the destination knowledge base.
 - [`repository-documentation-audit`](repository-documentation-audit/SKILL.md) audits and reorganizes repository documentation so topics have clear owners, useful knowledge is preserved, and documented claims match implementation.
-- [`knowledge-curator`](knowledge-curator/SKILL.md) reviews and non-destructively processes Markdown notes and manifested PDF or image inbox bundles into durable domain knowledge while preserving originals, evidence, links, and uncertainty. Local PDF extraction and English/German OCR require Tesseract and Poppler tools.
-- [`knowledge-janitor`](knowledge-janitor/SKILL.md) audits lifecycle state and hygiene for Markdown captures and manifested PDF or image bundles and proposes or applies narrowly approved archival and cleanup work.
-- [`outdoor-trip-curator`](outdoor-trip-curator/SKILL.md) researches and organizes outdoor trips and route ideas, independently reviews interpretation-sensitive evidence before canonical writing, and defers repository-specific schemas, paths, lifecycle, indexes, and tooling conventions to the target repository.
-- [`snowboard-curator`](snowboard-curator/SKILL.md) researches exact snowboard models and seasons, creates or updates sourced reports, and adds personal sizing and a test plan when requested. Repository-specific locations and rider context stay with the destination repository.
+
+Knowledge-base operational Skills are canonically maintained in the
+[`knowledge-base` repository](https://github.com/hiendriana/knowledge-base/tree/main/skills)
+because their change lifecycle is coupled to that repository. They remain
+reusable in design; this repository no longer distributes them.
 
 Platform compatibility should be inferred only from integration or metadata actually present in the relevant Skill.
 
@@ -60,7 +66,8 @@ Skills should:
 
 ## Install or clone
 
-Clone the repository directly into the live installation path:
+To consume `repository-documentation-audit` from this repository as a live
+top-level Skill, clone the repository directly into the live installation path:
 
 ```bash
 git clone <repository-url> ~/.agents/skills

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Snowboard Curator"
-  short_description: "Research snowboards and plan size tests"
-  default_prompt: "Use $snowboard-curator to research this snowboard and prepare a sourced report. Add a personal size recommendation and test plan if I want to test it."
