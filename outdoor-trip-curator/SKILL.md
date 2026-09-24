@@ -20,7 +20,12 @@ If the input is an active inbox capture, use the repository's generic curation w
 ## Research and Assess
 
 1. Identify the route or destination precisely and keep ambiguity explicit.
-2. Research repository-defined structured properties when they are relevant and can be established reliably, plus location, activity, difficulty, length or elevation, approach, descent, protection or equipment, season, access restrictions, objective hazards, and useful logistics when relevant.
+2. Research repository-defined structured properties and route details to the
+   depth justified by the record's current lifecycle and decision purpose. For
+   an early idea, prioritize identity, activity, location, overall character,
+   decision-relevant facts, major uncertainties, and provenance. Add detailed
+   approach, descent, protection, equipment, navigation, accommodation, and
+   logistics as they become relevant or the record advances toward planning.
 3. For climbing routes, search for available topos and compare useful versions.
 4. Prefer official route databases, guidebook publishers, land managers, huts, rescue or avalanche services, and other first-party sources. Use trip reports for attributed experience, not universal facts.
 5. Distinguish verified facts, attributed source claims, the user's personal assessment, and unresolved or time-sensitive information.
@@ -56,6 +61,29 @@ identity, and safety-relevant findings require the full review.
 ## Write or Update the Trip Note
 
 Follow the target repository's trip policy and template rather than a skill-owned schema.
+
+Use progressive enrichment within the repository's existing lifecycle. A
+template describes available structure, not necessarily the minimum content for
+every stage. For a newly captured idea, write enough evidence-rich context to
+explain what it is, why it may be interesting, the most useful established facts
+and clearly labelled inferences, decision-relevant uncertainties, provenance,
+and what decision or research would advance it. Do not expand it into a partial
+planning document merely because later-stage sections exist.
+
+Omit optional sections or rows whose only content would be placeholders such as
+`None`, `Not prepared`, `Not downloaded`, `Unreviewed`, `Not applicable`, or
+`To be determined`, unless repository policy requires them or the absence is
+itself decision-relevant. Do not omit a severe difficulty, glacier involvement,
+high commitment, access restriction, mandatory equipment requirement, major
+logistical constraint, seasonal limitation, or other fact that materially
+affects whether the user would pursue the idea.
+
+When the existing lifecycle advances toward planning, progressively add the
+stage-by-stage route analysis, detailed difficulty, protection, equipment,
+navigation and track provenance, huts and reservations, transport, approaches
+and descents, escape options, hazards, access, and seasonal conditions needed
+for an actionable plan. Do not invent a lifecycle state or new metadata to
+represent enrichment depth.
 
 - Use repository-defined structured properties exactly as documented.
 - Keep one canonical detailed owner for each trip when required; link from indexes instead of duplicating detail.

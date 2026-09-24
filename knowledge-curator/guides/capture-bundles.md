@@ -73,9 +73,10 @@ and require `methods`, `tools`, `languages`, `extracted_at`, `coverage`,
 hybrid PDF. Express PDF coverage as `all-pages` or an exact page set or range;
 use `whole-image` for an image, and record per-page orientation when PDF pages
 differ. Never alter a source file; recheck size and hash immediately before a
-processed move. A mismatch, collision, unreadable or encrypted file, unsupported
-type, invalid manifest, or ambiguous membership requires `needs-review` and
-prevents the move.
+processed move. A mismatch, unresolved path collision, unreadable or encrypted
+file, unsupported type, invalid manifest, or ambiguous membership requires
+`needs-review` and prevents the move. A processed-destination name collision
+that can be resolved safely under the inbox lifecycle guide is not unresolved.
 
 ## Registration
 
@@ -136,6 +137,8 @@ through the evidence guide.
 Validate durable integration before lifecycle changes. Then recheck manifest
 membership, file types, sizes, hashes, destination collision, and affected
 links. Update only generated extraction and lifecycle metadata; preserve the
-manifest body and original provenance. Move the complete bundle directory as
-one capture. If any step fails or only part of the bundle moves, restore or
-retain the complete active-inbox state and do not mark it processed.
+manifest body and original provenance. Resolve a processed-destination name
+collision using the descriptive, non-overwriting rule in the inbox lifecycle
+guide, then move the complete bundle directory as one capture. If any step fails
+or only part of the bundle moves, restore or retain the complete active-inbox
+state and do not mark it processed.

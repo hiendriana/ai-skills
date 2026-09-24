@@ -122,7 +122,9 @@ turn unless apply mode was explicitly selected.
    and record repository-relative `integrated_into` paths.
 7. Move the complete standalone capture or bundle directory, with body,
    provenance, manifest, and source files intact, from the active inbox to that
-   inbox's policy-defined `processed/` directory.
+   inbox's policy-defined `processed/` directory. Resolve destination-name
+   collisions through the inbox lifecycle guide; never overwrite, replace, or
+   repurpose an unrelated processed capture.
 8. Update links affected by the move. Avoid durable-page backlinks to the
    disposable processed capture unless the link remains genuinely useful.
 

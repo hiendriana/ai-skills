@@ -53,15 +53,46 @@ source material.
 - Resolve the target from repository policy; do not assume every repository or
   every directory named `processed` implements this lifecycle.
 - Move from an active inbox directly into that inbox's `processed/` directory,
-  preserving the filename or complete bundle directory name unless policy
-  defines a collision rule.
+  preserving the filename or complete bundle directory name when it is
+  available and policy does not require another name.
 - For a bundle, move `capture.md` and every declared source file together. Never
   move, process, or restore only part of a bundle.
-- Stop safely on collisions or ambiguous source and destination paths.
 - Update inbound links that would break. Prefer linking durable pages to durable
   owners rather than to a disposable processed capture.
 - Validate integration before metadata and movement. If later steps fail, do
   not leave a capture falsely marked or located as processed.
+
+### Processed-destination collisions
+
+Processing one Inbox capture must never destroy, replace, or repurpose an
+unrelated previously processed capture.
+
+First determine the normal destination name from repository policy. If that
+path is unused, follow the normal move unchanged. If it exists, inspect the
+complete captures rather than assuming that matching filenames mean matching
+content. Compare body and provenance for standalone notes; for bundles also
+compare the manifest identity, declared membership, sizes, and hashes.
+
+If the existing destination is the same already-processed capture, treat the
+situation as an idempotency case: do not overwrite it or repeat integration.
+Reconcile the remaining active path only as repository policy safely permits.
+If sameness cannot be established, preserve both captures and handle the
+destination as unrelated.
+
+For a different capture, derive a short human-readable suffix from the active
+capture's actual subject and append it to the original date or meaningful base
+name, following repository filename conventions. For example,
+`2026-09-23.md` may become `2026-09-23 Tour and Training Ideas.md`. Prefer a
+stable descriptive phrase over an arbitrary counter. If that candidate also
+exists, inspect it and choose another concise descriptive variant; never
+silently replace any existing path.
+
+Recheck the selected destination immediately before the move and use movement
+semantics that fail rather than overwrite if it has become occupied. A safely
+resolved filename collision does not make the capture `needs-review`: after
+successful integration, validation, metadata update, and collision-safe move,
+it may become `processed` normally. Use `needs-review` only when a substantive
+integration, ownership, evidence, content, or path ambiguity remains.
 
 ## Git evidence and idempotency
 
