@@ -40,6 +40,21 @@ to investigate a specific review finding. The packet must preserve source dates,
 attribution, grading systems, and distinctions among quoted facts, attributed
 opinions, and inference.
 
+## Distinguish epistemic status from review outcome
+
+Classify the support for each candidate while reviewing it:
+
+- `SOURCED` — the source explicitly establishes the claim.
+- `INFERRED` — the claim is a conclusion derived from identifiable sourced
+  evidence rather than something the source explicitly states.
+- `UNRESOLVED` — the available evidence does not support a sufficiently reliable
+  fact or useful inference.
+
+These are review concepts, not additional workflow outcomes or required
+persistent metadata. Do not impose them as fields on a destination repository.
+The review outcome remains `PASS`, `REVISE`, or `ESCALATE`; a well-supported and
+clearly represented `INFERRED` candidate can receive `PASS`.
+
 ## Preserve independence
 
 When the runtime supports fresh agents, subagents, or isolated contexts, use a
@@ -56,13 +71,18 @@ runtime did not provide.
 ## Review adversarially
 
 Try to falsify each consequential candidate rather than looking only for
-confirmation. Determine:
+confirmation. Evaluate source fidelity and inference quality independently.
+
+### Source fidelity
+
+Determine:
 
 - whether the cited evidence establishes the exact claim;
 - whether the claim is explicit or inferred;
-- whether synthesis introduced a classification or grading-system conversion;
 - whether the source describes the exact route and variant rather than a nearby,
   similarly named, shortened, extended, summer, winter, ski, or climbing route;
+- whether source terminology, grades, and qualifications are represented
+  accurately;
 - whether subjective or experiential language became an objective fact;
 - whether credible sources conflict;
 - whether qualifications, scope, dates, or uncertainty were lost; and
@@ -73,25 +93,52 @@ citation label or summary. A generally relevant source is not evidence for a
 specific statement it does not make. Distinguish absence of evidence from
 evidence that a feature is absent.
 
+### Inference quality
+
+For a candidate that extends beyond an explicit source statement, determine:
+
+- whether the conclusion follows reasonably from the cited evidence;
+- whether synthesis introduced a classification or grading-system conversion;
+- whether material assumptions and the evidentiary basis remain visible;
+- whether plausible alternative interpretations materially weaken the result;
+- whether confidence and uncertainty match the strength of the evidence;
+- whether the conclusion is useful enough to retain; and
+- whether its wording and intended location clearly distinguish it from a
+  source-attributed fact.
+
+Attempt to falsify important inferences, including by considering credible
+alternatives, rather than accepting a plausible narrative at face value. Hidden,
+misattributed, weak, or overconfident inference requires `REVISE` or `ESCALATE`;
+the fact that a conclusion is inferred does not by itself prevent `PASS`.
+
 ### Difficulty and grading
 
 A grade attributed to a source must be stated by that source for the exact route
-or variant. Preserve the source's grading system when possible. Do not derive or
-convert an overall grade from slope angles, pitches, hazards, narrative route
-characteristics, or a grade in another system unless the destination repository
-explicitly defines and permits that conversion.
+or variant. Preserve the source's grading system when possible. A derived grade
+or cross-system interpretation may be retained when it is useful, its supporting
+evidence is identifiable, the derivation is reasonable, uncertainty is visible,
+and destination-repository policy permits that representation. Label it as an
+inference; never attribute it to a source that does not state it.
 
-For example, descriptions that appear compatible with an alpine grade such as
-`ZS+` do not establish that grade. Reject or revise an unsupported derived grade;
-if repository policy permits recorded inference, label it explicitly as inference
-with its basis and uncertainty rather than presenting it as sourced fact.
+For example, reported UIAA II climbing, exposure, unmarked terrain, and demanding
+route-finding do not establish that a source assigns an SAC alpine grade. A
+candidate such as "Inferred overall character: approximately ZS based on the
+reported UIAA II climbing, exposure, unmarked terrain, and route-finding demands.
+No checked source assigns an SAC alpine grade" may pass if the reviewer finds the
+derivation defensible. "Tourentipp grades the route ZS+" must be revised unless
+Tourentipp explicitly provides that grade for the exact route or variant.
+
+Respect the destination repository's distinction between structured and prose
+content. If a structured grade field is defined as authoritative or source-backed,
+keep a permitted inferred grade in explanatory prose rather than placing it in
+that field. This protocol does not define a universal storage schema.
 
 ## Return a review result
 
 Return one overall outcome and itemized findings:
 
-- `PASS` — the evidence supports the candidate at the proposed specificity and
-  confidence.
+- `PASS` — the candidate is either explicitly supported or a reasonable,
+  clearly identified inference, at the proposed specificity and confidence.
 - `REVISE` — the candidate misinterprets, overstates, transforms, or incompletely
   represents available evidence and can reasonably be corrected. Identify the
   defect and the evidence that must be represented, but do not silently rewrite

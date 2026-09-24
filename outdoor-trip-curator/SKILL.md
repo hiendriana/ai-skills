@@ -40,6 +40,13 @@ until the review returns `PASS`, or until a `REVISE` result has been corrected a
 then passes a second review. After one failed correction, preserve the unresolved
 uncertainty or use `ESCALATE` rather than retrying or inventing a resolution.
 
+The review distinguishes explicit source facts, clearly identified inferences,
+and unresolved propositions. A useful inference may pass when its evidence and
+assumptions are visible, its reasoning is defensible, and its wording cannot be
+mistaken for a claim made by a source. Follow repository policy for where such an
+inference may be recorded; do not place it in an authoritative sourced field when
+that would misrepresent its status.
+
 Use a fresh reviewer context when the runtime supports one. Otherwise perform the
 guide's distinct adversarial verification pass and report that it was not
 context-independent. Simple directly sourced metadata may use proportionate
