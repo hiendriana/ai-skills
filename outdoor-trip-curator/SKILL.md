@@ -30,6 +30,22 @@ If the input is an active inbox capture, use the repository's generic curation w
 
 Browse whenever conditions, restrictions, route details, transport, accommodation, or recommendations could have changed. Link useful sources and include checked dates for time-sensitive information.
 
+## Review Candidate Findings Before Writing
+
+Before adding interpretation-sensitive external research to canonical knowledge,
+prepare candidate findings and run the independent evidence review in
+[the research review guide](guides/research-review.md). This is a write gate, not
+part of final output validation: canonical knowledge must not receive a candidate
+until the review returns `PASS`, or until a `REVISE` result has been corrected and
+then passes a second review. After one failed correction, preserve the unresolved
+uncertainty or use `ESCALATE` rather than retrying or inventing a resolution.
+
+Use a fresh reviewer context when the runtime supports one. Otherwise perform the
+guide's distinct adversarial verification pass and report that it was not
+context-independent. Simple directly sourced metadata may use proportionate
+checking; consequential interpretations, classifications, conversions, route
+identity, and safety-relevant findings require the full review.
+
 ## Write or Update the Trip Note
 
 Follow the target repository's trip policy and template rather than a skill-owned schema.
