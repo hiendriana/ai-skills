@@ -3,8 +3,9 @@
 ## Purpose
 
 This repository is both the Git source and the live installation for reusable
-AI Skills. Agents modifying it must preserve the installed top-level layout and
-keep changes focused, reviewable, and non-destructive.
+AI Skills whose maintenance lifecycle genuinely spans repositories. Agents
+modifying it must preserve the installed top-level layout and keep changes
+focused, reviewable, and non-destructive.
 
 ## Repository structure
 
@@ -17,6 +18,12 @@ keep changes focused, reviewable, and non-destructive.
 - Skill-specific material belongs inside the corresponding Skill directory.
 
 ## Skill ownership
+
+Keep a Skill here only when its change lifecycle is genuinely cross-repository.
+A Skill does not belong here merely because it is portable: repository-coupled
+Skills may live with their owning repository while remaining reusable in design.
+`repository-documentation-audit` remains here because it is independently
+applicable across repositories.
 
 Each Skill must remain self-contained. Typical ownership is:
 
@@ -46,25 +53,10 @@ requirements. Do not invent prospective formats such as `claude.yaml`.
   structure, or maintenance, update the owning documentation in the same
   change.
 
-## Shared content
-
-Do not create shared documentation merely because multiple Skills use similar
-wording. Create or move content into `shared/` only when:
-
-- at least two Skills genuinely depend on the same maintained guidance;
-- central ownership reduces real duplication;
-- the Skills can reference it without becoming harder to install or
-  understand; and
-- the shared file remains available in the live installation layout.
-
-Prefer self-contained Skills over excessive indirection. It is acceptable for
-`shared/` not to exist or to remain empty.
-
 ## Templates
 
-A repository-level `templates/` directory may contain only templates reused by
-multiple Skills. Skill-specific templates remain inside the Skill. Do not
-create placeholder templates.
+Keep Skill-specific templates inside the owning Skill. Do not create placeholder
+or repository-level shared templates without a demonstrated cross-Skill need.
 
 ## Validation
 

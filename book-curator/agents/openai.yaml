@@ -1,4 +1,0 @@
-interface:
-  display_name: "Book Curator"
-  short_description: "Research and curate books across knowledge bases"
-  default_prompt: "Use $book-curator to capture, deduplicate, and enrich this book according to the knowledge base book configuration."
